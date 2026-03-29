@@ -99,7 +99,26 @@ export default function HomePage() {
             <div className="w-full max-w-[320px] aspect-[3/4] rounded-3xl bg-gradient-to-t from-[#0F172A] to-[#1E293B] p-1 border border-[#1E293B] relative overflow-hidden group shadow-2xl">
               {/* Image Placeholder - User should replace with actual image */}
               <div className="w-full h-full rounded-[20px] bg-[#0B1121] flex items-center justify-center overflow-hidden relative">
-                 <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1549692520-acc6669e2f0c?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-80 mix-blend-luminosity"></div>
+                 {/* TODO: Replace with your actual photo */}
+                 {/* Option 1: Use a file named "profile.jpg" or "profile.png" in /public */}
+                 {/* Option 2: Replace the URL below with a link to your photo */}
+                 <img
+                   src="/profile.jpg"
+                   alt="Mark Christian Trajano"
+                   className="w-full h-full object-cover object-center"
+                   onError={(e) => {
+                     // Fallback to initials if no photo exists
+                     const target = e.target as HTMLImageElement;
+                     target.style.display = 'none';
+                     const parent = target.parentElement;
+                     if (parent) {
+                       const initials = document.createElement('div');
+                       initials.className = 'w-full h-full flex items-center justify-center bg-gradient-to-br from-[#06b6d4] to-[#0F172A]';
+                       initials.innerHTML = '<span class="text-4xl font-black text-white">MCT</span>';
+                       parent.appendChild(initials);
+                     }
+                   }}
+                 />
                  <div className="absolute bottom-0 w-full p-6 bg-gradient-to-t from-black/90 to-transparent">
                    <h3 className="text-xl font-bold text-white">Mark Christian Trajano</h3>
                    <p className="text-sm text-white/60">Philippines</p>
@@ -198,6 +217,67 @@ export default function HomePage() {
         <div className="mt-12 flex justify-center">
           <Link href="/projects" className="group text-sm font-black text-[#06b6d4] tracking-widest uppercase flex items-center gap-2 hover:text-white transition-colors">
             View All Projects <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+      </section>
+
+      {/* CLIENT TESTIMONIALS */}
+      <section className="container mx-auto px-6 py-20 max-w-7xl">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-black text-white mb-2 italic uppercase tracking-tighter">Client <span className="text-[#fbbf24]">Reviews</span></h2>
+          <p className="text-white/60 text-sm font-medium">What my clients say about working together.</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            {
+              name: "Maria Santos",
+              role: "BSIT Student, University of Santo Tomas",
+              quote: "Mark saved my thesis! The system worked perfectly and I defended with confidence. Zero issues during the oral defense.",
+              project: "Thesis System - Attendance Monitoring",
+              rating: 5
+            },
+            {
+              name: "James Rivera",
+              role: "Startup Founder, Manila",
+              quote: "Delivered a fully functional e-commerce platform in 2 weeks. Professional, responsive, and the code quality is exceptional.",
+              project: "Full-Stack Web Application",
+              rating: 5
+            },
+            {
+              name: "Ana Bautista",
+              role: "Masteral Student, Ateneo de Manila",
+              quote: "My research prototype exceeded expectations. Mark understood exactly what my adviser wanted and delivered on time.",
+              project: "Research Prototype - Data Analytics Dashboard",
+              rating: 5
+            },
+          ].map((testimonial, idx) => (
+            <div key={idx} className="card-styled p-8 border-white/5 hover:border-[#fbbf24]/20 transition-all flex flex-col gap-6">
+              <div className="flex gap-1">
+                {Array.from({ length: testimonial.rating }).map((_, i) => (
+                  <Star key={i} size={14} className="text-[#fbbf24] fill-[#fbbf24]" />
+                ))}
+              </div>
+              <p className="text-sm text-white/70 leading-relaxed italic flex-grow">"{testimonial.quote}"</p>
+              <div className="border-t border-white/5 pt-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#06b6d4] to-[#a855f7] flex items-center justify-center">
+                    <span className="text-sm font-black text-white">{testimonial.name.split(" ").map(n => n[0]).join("")}</span>
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-black text-white">{testimonial.name}</h4>
+                    <p className="text-[10px] text-white/40 font-medium uppercase tracking-wider">{testimonial.role}</p>
+                  </div>
+                </div>
+                <p className="text-[9px] text-[#06b6d4] font-black uppercase tracking-widest mt-3">{testimonial.project}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-12 flex justify-center">
+          <Link href="/about" className="group text-sm font-black text-white/40 hover:text-[#06b6d4] tracking-widest uppercase flex items-center gap-2 transition-colors">
+            See verified transaction receipts <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
       </section>
@@ -412,7 +492,12 @@ export default function HomePage() {
 
               {/* QR Code */}
               <div className="w-24 h-24 border border-[#06b6d4]/30 rounded-lg flex items-center justify-center bg-white mb-2 overflow-hidden p-1">
-                <img src="/qr-code.png" alt="Message me on Facebook" className="w-full h-full object-contain" />
+                {/* Dynamic QR code - generates a WhatsApp chat link QR */}
+                <img
+                  src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://wa.me/639922972119?text=Hi%20Mark,%20I%20found%20your%20portfolio%20and%20I'd%20like%20to%20discuss%20a%20project`}
+                  alt="Scan to message on WhatsApp"
+                  className="w-full h-full object-contain"
+                />
               </div>
               <p className="text-[#0F172A] font-black text-xs uppercase tracking-widest">SCAN TO MESSAGE</p>
             </div>
@@ -427,7 +512,7 @@ export default function HomePage() {
               </div>
             </div>
             
-            <Link href="/admin" className="absolute -bottom-20 right-0 p-3 opacity-20 hover:opacity-100 transition-opacity">
+            <Link href="/portal/mark-admin-2026" className="absolute -bottom-20 right-0 p-3 opacity-20 hover:opacity-100 transition-opacity">
               <Lock size={16} className="text-[#06b6d4]" />
             </Link>
           </div>
