@@ -29,15 +29,6 @@ export default function ContactPage() {
     setIsSubmitting(true);
 
     try {
-      // Try to save via Convex if available, otherwise show success anyway
-      try {
-        const { useMutation } = await import("convex/react");
-        const { api } = await import("../../convex/_generated/api");
-        // If Convex is available, this will work
-      } catch {
-        // Convex not configured, just show success
-      }
-
       // Simulate network delay
       await new Promise((resolve) => setTimeout(resolve, 1000));
       setSubmitted(true);
