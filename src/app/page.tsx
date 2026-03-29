@@ -55,7 +55,7 @@ export default function HomePage() {
     }
   ];
 
-  const displayOutputs = recentOutputs.slice(0, 3);
+  const displayOutputs = recentOutputs.filter(o => o.type === activeOutputTab);
 
   return (
     <div className="min-h-screen">
