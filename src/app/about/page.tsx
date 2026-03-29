@@ -52,7 +52,7 @@ const DEMO_PROOFS = [
 ];
 
 export default function AboutPage() {
-  const proofs = useQuery(api.proofs.getProofs) || [];
+  const proofs = useQuery(api.proofs.getProofs, {}) || [];
   // Show demo proofs if no real proofs exist
   const displayProofs = proofs.length > 0 ? proofs : DEMO_PROOFS;
   const [carouselIndex, setCarouselIndex] = React.useState(0);

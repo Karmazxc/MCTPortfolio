@@ -43,8 +43,8 @@ export default function AdminDashboard() {
   const addLog = useMutation(api.logs ? api.logs.addLog : api.proofs.saveProof);
 
   // Convex Queries
-  const proofs = useQuery(api.proofs.getProofs) || [];
-  const logs = useQuery(api.logs ? api.logs.getLogs : api.proofs.getProofs) || [];
+  const proofs = useQuery(api.proofs.getProofs, {}) || [];
+  const logs = useQuery(api.logs ? api.logs.getLogs : api.proofs.getProofs, {}) || [];
   
   /*
 # Portfolio Refinement & Phase 5: Payment Proofs
