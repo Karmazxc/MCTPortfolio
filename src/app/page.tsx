@@ -99,11 +99,8 @@ export default function HomePage() {
             <div className="w-full max-w-[320px] aspect-[3/4] rounded-3xl bg-gradient-to-t from-[#0F172A] to-[#1E293B] p-1 border border-[#1E293B] relative overflow-hidden group shadow-2xl">
               {/* Image Placeholder - User should replace with actual image */}
               <div className="w-full h-full rounded-[20px] bg-[#0B1121] flex items-center justify-center overflow-hidden relative">
-                 {/* TODO: Replace with your actual photo */}
-                 {/* Option 1: Use a file named "profile.jpg" or "profile.png" in /public */}
-                 {/* Option 2: Replace the URL below with a link to your photo */}
                  <img
-                   src="/profile.jpg"
+                   src="/profile.png"
                    alt="Mark Christian Trajano"
                    className="w-full h-full object-cover object-center"
                    onError={(e) => {
@@ -150,7 +147,7 @@ export default function HomePage() {
             
             <Link href="/about">
               <Button variant="outline" className="group border-[#06b6d4]/30 hover:border-[#06b6d4] bg-[#06b6d4]/5 text-[#06b6d4] py-6 px-10 rounded-full text-[10px] font-black uppercase tracking-widest">
-                View Verification Feed <Zap size={14} className="ml-2 group-hover:scale-125 transition-transform fill-[#06b6d4]/20" />
+                View Transaction Feed <Zap size={14} className="ml-2 group-hover:scale-125 transition-transform fill-[#06b6d4]/20" />
               </Button>
             </Link>
           </div>
