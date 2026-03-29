@@ -9,7 +9,8 @@
       "Bash(vercel whoami:*)",
       "Bash(vercel:*)",
       "Bash(git push:*)",
-      "Bash(npx convex:*)"
+      "Bash(npx convex:*)",
+      "Bash(npm install:*)"
     ]
   }
 }
