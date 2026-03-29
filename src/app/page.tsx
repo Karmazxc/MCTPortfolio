@@ -23,7 +23,7 @@ import {
 import { STATS, PRICING, TIMELINES } from "@/lib/constants";
 
 export default function HomePage() {
-  const [activeOutputTab, setActiveOutputTab] = useState("Systems & Web");
+  const [activeOutputTab, setActiveOutputTab] = useState("All");
 
   const recentOutputs = [
     {
@@ -55,7 +55,9 @@ export default function HomePage() {
     }
   ];
 
-  const displayOutputs = recentOutputs.filter(o => o.type === activeOutputTab);
+  const displayOutputs = activeOutputTab === "All"
+    ? recentOutputs
+    : recentOutputs.filter(o => o.type === activeOutputTab);
 
   return (
     <div className="min-h-screen">
@@ -163,20 +165,26 @@ export default function HomePage() {
             <h2 className="text-4xl md:text-5xl font-black text-white mb-2">Recent Outputs</h2>
             <p className="text-white/60 font-medium">A glimpse of quality documentation and code.</p>
           </div>
-          <div className="flex bg-[#0F172A] border border-[#1E293B] rounded-xl p-1 mt-6 md:mt-0">
-            <button 
+          <div className="flex bg-[#0F172A] border border-[#1E293B] rounded-xl p-1 mt-6 md:mt-0 gap-1">
+            <button
+              onClick={() => setActiveOutputTab("All")}
+              className={`px-6 py-2 rounded-lg text-xs font-bold uppercase tracking-widest transition-colors ${activeOutputTab === "All" ? "bg-[#06b6d4] text-[#0F172A]" : "text-white/70 hover:text-white"}`}
+            >
+              All
+            </button>
+            <button
               onClick={() => setActiveOutputTab("Systems & Web")}
               className={`px-6 py-2 rounded-lg text-xs font-bold uppercase tracking-widest transition-colors ${activeOutputTab === "Systems & Web" ? "bg-[#06b6d4] text-[#0F172A]" : "text-white/70 hover:text-white"}`}
             >
               Systems & Web
             </button>
-            <button 
+            <button
               onClick={() => setActiveOutputTab("Thesis & Research")}
               className={`px-6 py-2 rounded-lg text-xs font-bold uppercase tracking-widest transition-colors ${activeOutputTab === "Thesis & Research" ? "bg-[#06b6d4] text-[#0F172A]" : "text-white/70 hover:text-white"}`}
             >
               Thesis
             </button>
-            <button 
+            <button
               onClick={() => setActiveOutputTab("Mobile App")}
               className={`px-6 py-2 rounded-lg text-xs font-bold uppercase tracking-widest transition-colors ${activeOutputTab === "Mobile App" ? "bg-[#06b6d4] text-[#0F172A]" : "text-white/70 hover:text-white"}`}
             >
