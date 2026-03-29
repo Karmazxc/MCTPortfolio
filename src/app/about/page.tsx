@@ -26,8 +26,35 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { STATS, PRICING, CONTACT } from "@/lib/constants";
 
+// Demo/placeholder proof cards to showcase the layout
+const DEMO_PROOFS = [
+  {
+    _id: "demo-1",
+    title: "GCash Payment - Project Deposit",
+    category: "transactions",
+    url: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&q=80",
+    uploadedAt: Date.now() - 86400000,
+  },
+  {
+    _id: "demo-2",
+    title: "Bank Transfer Receipt - Web App",
+    category: "transactions",
+    url: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80",
+    uploadedAt: Date.now() - 172800000,
+  },
+  {
+    _id: "demo-3",
+    title: "PayPal Verification - Thesis Project",
+    category: "transactions",
+    url: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&q=80",
+    uploadedAt: Date.now() - 259200000,
+  },
+];
+
 export default function AboutPage() {
   const proofs = useQuery(api.proofs.getProofs) || [];
+  // Show demo proofs if no real proofs exist
+  const displayProofs = proofs.length > 0 ? proofs : DEMO_PROOFS;
   const [carouselIndex, setCarouselIndex] = React.useState(0);
   return (
     <div className="container mx-auto px-6 py-24 max-w-5xl">
@@ -72,9 +99,9 @@ export default function AboutPage() {
                  >
                    <ChevronLeft size={20} />
                  </button>
-                 <button 
-                  onClick={() => setCarouselIndex((prev) => Math.min(Math.max(0, proofs.length - 2), prev + 1))}
-                  disabled={proofs.length <= 2 || carouselIndex >= proofs.length - 2}
+                 <button
+                  onClick={() => setCarouselIndex((prev) => Math.min(Math.max(0, displayProofs.length - 2), prev + 1))}
+                  disabled={displayProofs.length <= 2 || carouselIndex >= displayProofs.length - 2}
                   className="w-10 h-10 rounded-full border border-white/5 bg-white/5 flex items-center justify-center text-white hover:bg-white/10 hover:border-white/20 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
                  >
                    <ChevronRight size={20} />
@@ -87,7 +114,7 @@ export default function AboutPage() {
                   className="flex gap-6 transition-transform duration-500 ease-out py-4"
                   style={{ transform: `translateX(calc(-${carouselIndex} * (300px + 24px)))` }}
                 >
-                  {proofs.length > 0 ? proofs.map((proof: any) => (
+                  {displayProofs.length > 0 ? displayProofs.map((proof: any) => (
                      <div key={proof._id} className="w-[320px] flex-shrink-0 card-styled overflow-hidden group border-white/5 hover:border-[#06b6d4]/30 transition-all bg-[#0B1121]/90 hover:-translate-y-2 duration-700 shadow-2xl">
                         <div className="aspect-[3/2] relative overflow-hidden bg-white/5">
                            <img src={proof.url} alt={proof.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 opacity-60 group-hover:opacity-100" />

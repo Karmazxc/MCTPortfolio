@@ -5,7 +5,10 @@
       "Bash(gh repo:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git config:*)"
+      "Bash(git config:*)",
+      "Bash(vercel whoami:*)",
+      "Bash(vercel:*)",
+      "Bash(git push:*)"
     ]
   }
 }
