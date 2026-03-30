@@ -179,18 +179,6 @@ export default function ProjectsPage() {
                      No Demo
                   </Button>
                 )}
-                
-                {project.codeLink && project.codeLink !== "#" ? (
-                  <a href={project.codeLink} target="_blank" rel="noreferrer" className="flex-1">
-                    <Button variant="outline" size="sm" className="w-full rounded-lg uppercase tracking-widest text-[9px] font-black h-11 border-white/10 hover:bg-white/5">
-                       View Code
-                    </Button>
-                  </a>
-                ) : (
-                  <Button disabled size="sm" className="flex-1 rounded-lg uppercase tracking-widest text-[9px] font-black h-11 bg-white/5 text-white/20 border-white/10 cursor-not-allowed">
-                     Private
-                  </Button>
-                )}
               </div>
             </div>
 
