@@ -28,14 +28,84 @@ export default function HomePage() {
   // Fetch projects from Convex database
   const dbProjects = useQuery(api.projects.getProjects) || [];
 
-  // Map database projects to the format needed for display
-  const recentProjects = dbProjects.slice(0, 6).map((p: any) => ({
+  // Hardcoded projects (same as in projects page)
+  const initialProjects = [
+    {
+      title: "ManilaPRO",
+      description: "A dynamic real estate platform integrating property listings with predictive analytics for market trends and an interactive chat system for seamless client-agent communication.",
+      category: "Web",
+      year: "2024",
+      tech: ["Next.js", "Tailwind", "Convex", "Analytics", "Chat"],
+      image: "https://shot.screenshotapi.net/screenshot?url=https://manila-pro.vercel.app&width=800&height=600&fresh=true",
+      demoLink: "https://manila-pro.vercel.app/"
+    },
+    {
+      title: "2D Mapping (AgriMapper)",
+      description: "Farm mapping application for tracking and managing crops using interactive 2D mapping technology.",
+      category: "Web",
+      year: "2024",
+      tech: ["Next.js", "Mapping API", "Tailwind", "PostgreSQL"],
+      image: "https://shot.screenshotapi.net/screenshot?url=https://www.agrimapper.online&width=800&height=600&fresh=true",
+      demoLink: "https://www.agrimapper.online/"
+    },
+    {
+      title: "ERMS",
+      description: "Records Management System for Schools with integrated Recommender System for student performance analysis.",
+      category: "Thesis Systems",
+      year: "2024",
+      tech: ["Next.js", "Express", "MongoDB", "Recommender System"],
+      image: "https://shot.screenshotapi.net/screenshot?url=https://e-sms.vercel.app&width=800&height=600&fresh=true",
+      demoLink: "https://e-sms.vercel.app/"
+    },
+    {
+      title: "Maristela",
+      description: "Online Ordering System for restaurants with demand forecasting to predict inventory needs and reduce waste.",
+      category: "Web",
+      year: "2024",
+      tech: ["Next.js", "Tailwind", "Forecasting", "POS Integration"],
+      image: "https://shot.screenshotapi.net/screenshot?url=https://maristela-restaurant.vercel.app&width=800&height=600&fresh=true",
+      demoLink: "https://maristela-restaurant.vercel.app/"
+    },
+    {
+      title: "A1 Agro Payroll",
+      description: "Comprehensive payroll management system designed for agricultural companies with employee tracking and attendance.",
+      category: "Web",
+      year: "2024",
+      tech: ["Next.js", "Tailwind", "PostgreSQL", "Payroll Processing"],
+      image: "https://shot.screenshotapi.net/screenshot?url=https://a1-agro-fertilizers-payroll-system.vercel.app&width=800&height=600&fresh=true",
+      demoLink: "https://a1-agro-fertilizers-payroll-system.vercel.app/"
+    },
+    {
+      title: "Naravel Tales",
+      description: "A gamified story-based card shuffling game with engaging narratives inspired by Filipino culture.",
+      category: "Web",
+      year: "2025",
+      tech: ["Next.js", "Tailwind", "Game Logic", "Card System"],
+      image: "https://shot.screenshotapi.net/screenshot?url=https://www.naraveltales.online&width=800&height=600&fresh=true",
+      demoLink: "https://www.naraveltales.online/"
+    },
+    {
+      title: "Filipiknow",
+      description: "2D educational game based on Noli Me Tangere and El Filibusterismo - made with Godot Engine.",
+      category: "Mobile",
+      year: "2025",
+      tech: ["Godot", "2D Game", "Educational", "Filipino Literature"],
+      image: "https://shot.screenshotapi.net/screenshot?url=https://filipiknow-teacher-portal.vercel.app&width=800&height=600&fresh=true",
+      demoLink: "https://filipiknow-teacher-portal.vercel.app/"
+    }
+  ];
+
+  // Combine database projects with hardcoded projects
+  const allProjects = [...dbProjects, ...initialProjects];
+
+  // Map to display format
+  const recentProjects = allProjects.slice(0, 6).map((p: any) => ({
     type: p.category === "Thesis Systems" ? "Thesis & Research" : p.category === "Mobile" ? "Mobile App" : "Systems & Web",
     tag: p.category === "Thesis Systems" ? "THESIS" : p.category === "Mobile" ? "MOBILE" : "WEB",
     title: p.title,
     desc: p.description,
-    image: p.image || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
-    link: "/projects",
+    image: p.image || p.demoLink ? `https://shot.screenshotapi.net/screenshot?url=${p.demoLink}&width=800&height=600&fresh=true` : "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
+    link: p.demoLink || "/projects",
     year: p.year || "2024"
   }));
 
