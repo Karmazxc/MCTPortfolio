@@ -27,116 +27,9 @@ export default function ProjectsPage() {
 
   // Convex Queries and Mutations
   const dbProjects = useQuery(api.projects.getProjects) || [];
-  const addProject = async (data: any) => console.log("DB Hook Placeholder:", data); // const addProject = useMutation(api.projects.addProject);
-  
-  const initialProjects = [
-    {
-      title: "ManilaPRO",
-      description: "A dynamic real estate platform integrating property listings with predictive analytics for market trends and an interactive chat system for seamless client-agent communication.",
-      category: "Web",
-      year: "2024",
-      tech: ["Next.js", "Tailwind", "Convex", "Analytics", "Chat"],
-      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=800&auto=format&fit=crop",
-      demoLink: "https://manila-pro.vercel.app/",
-      codeLink: "#"
-    },
-    {
-      title: "2D Mapping (AgriMapper)",
-      description: "Farm mapping application for tracking and managing crops using interactive 2D mapping technology.",
-      category: "Web",
-      year: "2024",
-      tech: ["Next.js", "Mapping API", "Tailwind", "PostgreSQL"],
-      image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=800&auto=format&fit=crop",
-      demoLink: "https://www.agrimapper.online/",
-      codeLink: "#"
-    },
-    {
-      title: "ERMS",
-      description: "Records Management System for Schools with integrated Recommender System for student performance analysis.",
-      category: "Thesis Systems",
-      year: "2024",
-      tech: ["Next.js", "Express", "MongoDB", "Recommender System"],
-      image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop",
-      demoLink: "https://e-sms.vercel.app/",
-      codeLink: "#"
-    },
-    {
-      title: "Maristela",
-      description: "Online Ordering System for restaurants with demand forecasting to predict inventory needs and reduce waste.",
-      category: "Web",
-      year: "2024",
-      tech: ["Next.js", "Tailwind", "Forecasting", "POS Integration"],
-      image: "https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=800&auto=format&fit=crop",
-      demoLink: "https://maristela-restaurant.vercel.app/",
-      codeLink: "#"
-    },
-    {
-      title: "A1 Agro Payroll",
-      description: "Comprehensive payroll management system designed for agricultural companies with employee tracking and attendance.",
-      category: "Web",
-      year: "2024",
-      tech: ["Next.js", "Tailwind", "PostgreSQL", "Payroll Processing"],
-      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=800&auto=format&fit=crop",
-      demoLink: "https://a1-agro-fertilizers-payroll-system.vercel.app/",
-      codeLink: "#"
-    },
-    {
-      title: "Naravel Tales",
-      description: "A gamified story-based card shuffling game with engaging narratives inspired by Filipino culture.",
-      category: "Web",
-      year: "2025",
-      tech: ["Next.js", "Tailwind", "Game Logic", "Card System"],
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop",
-      demoLink: "https://www.naraveltales.online/",
-      codeLink: "#"
-    },
-    {
-      title: "Filipiknow",
-      description: "2D educational game based on Noli Me Tangere and El Filibusterismo - made with Godot Engine.",
-      category: "Mobile",
-      year: "2025",
-      tech: ["Godot", "2D Game", "Educational", "Filipino Literature"],
-      image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?q=80&w=800&auto=format&fit=crop",
-      demoLink: "https://filipiknow-teacher-portal.vercel.app/",
-      codeLink: "#"
-    },
-    {
-      title: "FitTrack Pro",
-      description: "React Native fitness tracker with real-time heartbeat monitoring and community challenges for staying motivated.",
-      category: "Mobile",
-      year: "2025",
-      tech: ["React Native", "Expo", "Firebase", "HealthKit"],
-      image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=800&auto=format&fit=crop",
-      demoLink: "#",
-      codeLink: "#"
-    },
-    {
-      title: "Student Task Tracker",
-      description: "A mobile application helping university students track thesis tasks and collaborate with groupmates in real-time.",
-      category: "Mobile",
-      year: "2023",
-      tech: ["React Native", "Expo", "Firebase", "Zustand"],
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
-      demoLink: "#",
-      codeLink: "#"
-    },
-    {
-      title: "University Attendance",
-      description: "A thesis system utilizing QR codes and geolocation to monitor real-time class attendance securely.",
-      category: "Mobile",
-      year: "2024",
-      tech: ["React Native", "Express", "MongoDB", "QR Scanning"],
-      image: "https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=800&auto=format&fit=crop",
-      demoLink: "#",
-      codeLink: "#"
-    }
-  ];
-
-  // Combine fetched projects with initial hardcoded projects
-  const allProjects = [...dbProjects, ...initialProjects];
 
   const categories = ["All", "Web", "Mobile", "Thesis Systems"];
-  const filteredProjects = filter === "All" ? allProjects : allProjects.filter(p => p.category === filter);
+  const filteredProjects = filter === "All" ? dbProjects : dbProjects.filter((p: any) => p.category === filter);
 
   return (
     <div className="container mx-auto px-6 py-24 max-w-6xl relative min-h-screen">
@@ -190,9 +83,9 @@ export default function ProjectsPage() {
               </p>
               
               <div className="flex flex-wrap gap-2 mb-8">
-                {project.tech.map((t: string) => (
-                  <span key={t} className="px-2 py-1 rounded bg-white/5 border border-white/10 text-[9px] font-bold text-white/60 uppercase tracking-widest group-hover:border-white/20 transition-colors">
-                    {t}
+                {(Array.isArray(project.tech) ? project.tech : project.tech?.split(",") || []).map((t: string, i: number) => (
+                  <span key={i} className="px-2 py-1 rounded bg-white/5 border border-white/10 text-[9px] font-bold text-white/60 uppercase tracking-widest group-hover:border-white/20 transition-colors">
+                    {typeof t === 'string' ? t.trim() : t}
                   </span>
                 ))}
               </div>

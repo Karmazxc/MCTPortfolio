@@ -28,83 +28,13 @@ export default function HomePage() {
   // Fetch projects from Convex database
   const dbProjects = useQuery(api.projects.getProjects) || [];
 
-  // Hardcoded projects (same as in projects page)
-  const initialProjects = [
-    {
-      title: "ManilaPRO",
-      description: "A dynamic real estate platform integrating property listings with predictive analytics for market trends and an interactive chat system for seamless client-agent communication.",
-      category: "Web",
-      year: "2024",
-      tech: ["Next.js", "Tailwind", "Convex", "Analytics", "Chat"],
-      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=800&auto=format&fit=crop",
-      demoLink: "https://manila-pro.vercel.app/"
-    },
-    {
-      title: "2D Mapping (AgriMapper)",
-      description: "Farm mapping application for tracking and managing crops using interactive 2D mapping technology.",
-      category: "Web",
-      year: "2024",
-      tech: ["Next.js", "Mapping API", "Tailwind", "PostgreSQL"],
-      image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=800&auto=format&fit=crop",
-      demoLink: "https://www.agrimapper.online/"
-    },
-    {
-      title: "ERMS",
-      description: "Records Management System for Schools with integrated Recommender System for student performance analysis.",
-      category: "Thesis Systems",
-      year: "2024",
-      tech: ["Next.js", "Express", "MongoDB", "Recommender System"],
-      image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop",
-      demoLink: "https://e-sms.vercel.app/"
-    },
-    {
-      title: "Maristela",
-      description: "Online Ordering System for restaurants with demand forecasting to predict inventory needs and reduce waste.",
-      category: "Web",
-      year: "2024",
-      tech: ["Next.js", "Tailwind", "Forecasting", "POS Integration"],
-      image: "https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=800&auto=format&fit=crop",
-      demoLink: "https://maristela-restaurant.vercel.app/"
-    },
-    {
-      title: "A1 Agro Payroll",
-      description: "Comprehensive payroll management system designed for agricultural companies with employee tracking and attendance.",
-      category: "Web",
-      year: "2024",
-      tech: ["Next.js", "Tailwind", "PostgreSQL", "Payroll Processing"],
-      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=800&auto=format&fit=crop",
-      demoLink: "https://a1-agro-fertilizers-payroll-system.vercel.app/"
-    },
-    {
-      title: "Naravel Tales",
-      description: "A gamified story-based card shuffling game with engaging narratives inspired by Filipino culture.",
-      category: "Web",
-      year: "2025",
-      tech: ["Next.js", "Tailwind", "Game Logic", "Card System"],
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop",
-      demoLink: "https://www.naraveltales.online/"
-    },
-    {
-      title: "Filipiknow",
-      description: "2D educational game based on Noli Me Tangere and El Filibusterismo - made with Godot Engine.",
-      category: "Mobile",
-      year: "2025",
-      tech: ["Godot", "2D Game", "Educational", "Filipino Literature"],
-      image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?q=80&w=800&auto=format&fit=crop",
-      demoLink: "https://filipiknow-teacher-portal.vercel.app/"
-    }
-  ];
-
-  // Combine database projects with hardcoded projects
-  const allProjects = [...dbProjects, ...initialProjects];
-
   // Map to display format
-  const recentProjects = allProjects.slice(0, 6).map((p: any) => ({
+  const recentProjects = dbProjects.slice(0, 6).map((p: any) => ({
     type: p.category === "Thesis Systems" ? "Thesis & Research" : p.category === "Mobile" ? "Mobile App" : "Systems & Web",
     tag: p.category === "Thesis Systems" ? "THESIS" : p.category === "Mobile" ? "MOBILE" : "WEB",
     title: p.title,
     desc: p.description,
-    image: p.image || p.demoLink ? `https://shot.screenshotapi.net/screenshot?url=${p.demoLink}&width=800&height=600&fresh=true` : "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
+    image: p.image || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
     link: p.demoLink || "/projects",
     year: p.year || "2024"
   }));
