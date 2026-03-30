@@ -25,39 +25,23 @@ import { STATS, PRICING, TIMELINES } from "@/lib/constants";
 export default function HomePage() {
   const [activeOutputTab, setActiveOutputTab] = useState("All");
 
-  const recentOutputs = [
-    {
-      type: "Systems & Web",
-      tag: "WEB",
-      title: "VibeSync",
-      desc: "A real-time music collaboration platform for remote teams, featuring synchronized playback and interactive voting queues.",
-      image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=800&auto=format&fit=crop",
-      link: "/projects",
-      year: "2024"
-    },
-    {
-      type: "Thesis & Research",
-      tag: "THESIS",
-      title: "Smart Waste Management",
-      desc: "An IoT-based research project including full documentation and a monitoring dashboard for urban sanitation optimization.",
-      image: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?q=80&w=800&auto=format&fit=crop",
-      link: "/thesis",
-      year: "2024"
-    },
-    {
-      type: "Mobile App",
-      tag: "MOBILE",
-      title: "FitTrack Pro",
-      desc: "React Native fitness tracker with real-time heartbeat monitoring and community challenges.",
-      image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=800&auto=format&fit=crop",
-      link: "/projects",
-      year: "2025"
-    }
-  ];
+  // Fetch projects from Convex database
+  const dbProjects = useQuery(api.projects.getProjects) || [];
+
+  // Map database projects to the format needed for display
+  const recentProjects = dbProjects.slice(0, 6).map((p: any) => ({
+    type: p.category === "Thesis Systems" ? "Thesis & Research" : p.category === "Mobile" ? "Mobile App" : "Systems & Web",
+    tag: p.category === "Thesis Systems" ? "THESIS" : p.category === "Mobile" ? "MOBILE" : "WEB",
+    title: p.title,
+    desc: p.description,
+    image: p.image || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
+    link: "/projects",
+    year: p.year || "2024"
+  }));
 
   const displayOutputs = activeOutputTab === "All"
-    ? recentOutputs
-    : recentOutputs.filter(o => o.type === activeOutputTab);
+    ? recentProjects
+    : recentProjects.filter(o => o.type === activeOutputTab);
 
   return (
     <div className="min-h-screen">
@@ -158,12 +142,12 @@ export default function HomePage() {
 
       {/* SERVICES NOW MOVED TO /services */}
 
-      {/* RECENT OUTPUTS */}
+      {/* RECENT PROJECTS */}
       <section className="container mx-auto px-6 py-20 max-w-7xl">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12">
           <div>
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-2">Recent Outputs</h2>
-            <p className="text-white/60 font-medium">A glimpse of quality documentation and code.</p>
+            <h2 className="text-4xl md:text-5xl font-black text-white mb-2">Recent Projects</h2>
+            <p className="text-white/60 font-medium">A glimpse of quality work and code.</p>
           </div>
           <div className="flex bg-[#0F172A] border border-[#1E293B] rounded-xl p-1 mt-6 md:mt-0 gap-1">
             <button
