@@ -36,7 +36,7 @@ export default function ProjectsPage() {
       category: "Web",
       year: "2024",
       tech: ["Next.js", "Tailwind", "Convex", "Analytics", "Chat"],
-      image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800&auto=format&fit=crop",
+      image: "https://shot.screenshotapi.net/screenshot?url=https://manila-pro.vercel.app&width=800&height=600&fresh=true",
       demoLink: "https://manila-pro.vercel.app/",
       codeLink: "#"
     },
@@ -46,7 +46,7 @@ export default function ProjectsPage() {
       category: "Web",
       year: "2024",
       tech: ["Next.js", "Mapping API", "Tailwind", "PostgreSQL"],
-      image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=800&auto=format&fit=crop",
+      image: "https://shot.screenshotapi.net/screenshot?url=https://www.agrimapper.online&width=800&height=600&fresh=true",
       demoLink: "https://www.agrimapper.online/",
       codeLink: "#"
     },
@@ -56,7 +56,7 @@ export default function ProjectsPage() {
       category: "Thesis Systems",
       year: "2024",
       tech: ["Next.js", "Express", "MongoDB", "Recommender System"],
-      image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop",
+      image: "https://shot.screenshotapi.net/screenshot?url=https://e-sms.vercel.app&width=800&height=600&fresh=true",
       demoLink: "https://e-sms.vercel.app/",
       codeLink: "#"
     },
@@ -66,7 +66,7 @@ export default function ProjectsPage() {
       category: "Web",
       year: "2024",
       tech: ["Next.js", "Tailwind", "Forecasting", "POS Integration"],
-      image: "https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=800&auto=format&fit=crop",
+      image: "https://shot.screenshotapi.net/screenshot?url=https://maristela-restaurant.vercel.app&width=800&height=600&fresh=true",
       demoLink: "https://maristela-restaurant.vercel.app/",
       codeLink: "#"
     },
@@ -76,7 +76,7 @@ export default function ProjectsPage() {
       category: "Web",
       year: "2024",
       tech: ["Next.js", "Tailwind", "PostgreSQL", "Payroll Processing"],
-      image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=800&auto=format&fit=crop",
+      image: "https://shot.screenshotapi.net/screenshot?url=https://a1-agro-fertilizers-payroll-system.vercel.app&width=800&height=600&fresh=true",
       demoLink: "https://a1-agro-fertilizers-payroll-system.vercel.app/",
       codeLink: "#"
     },
@@ -86,18 +86,51 @@ export default function ProjectsPage() {
       category: "Web",
       year: "2025",
       tech: ["Next.js", "Tailwind", "Game Logic", "Card System"],
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop",
+      image: "https://shot.screenshotapi.net/screenshot?url=https://www.naraveltales.online&width=800&height=600&fresh=true",
       demoLink: "https://www.naraveltales.online/",
       codeLink: "#"
     },
     {
       title: "Filipiknow",
       description: "2D educational game based on Noli Me Tangere and El Filibusterismo - made with Godot Engine.",
-      category: "Thesis Systems",
+      category: "Mobile",
       year: "2025",
       tech: ["Godot", "2D Game", "Educational", "Filipino Literature"],
-      image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?q=80&w=800&auto=format&fit=crop",
+      image: "https://shot.screenshotapi.net/screenshot?url=https://filipiknow-teacher-portal.vercel.app&width=800&height=600&fresh=true",
       demoLink: "https://filipiknow-teacher-portal.vercel.app/",
+      codeLink: "#"
+    },
+    {
+      title: "FitTrack Pro",
+      description: "React Native fitness tracker with real-time heartbeat monitoring and community challenges for staying motivated.",
+      category: "Mobile",
+      year: "2025",
+      tech: ["React Native", "Expo", "Firebase", "HealthKit"],
+      image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=800&auto=format&fit=crop",
+      demoLink: "#",
+      codeLink: "#"
+    },
+    {
+      title: "Student Task Tracker",
+      description: "A mobile application helping university students track thesis tasks and collaborate with groupmates in real-time.",
+      category: "Mobile",
+      year: "2023",
+      tech: ["React Native", "Expo", "Firebase", "Zustand"],
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
+      demoLink: "#",
+      codeLink: "#"
+    },
+    {
+      title: "University Attendance",
+      description: "A thesis system utilizing QR codes and geolocation to monitor real-time class attendance securely.",
+      category: "Mobile",
+      year: "2024",
+      tech: ["React Native", "Express", "MongoDB", "QR Scanning"],
+      image: "https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=800&auto=format&fit=crop",
+      demoLink: "#",
+      codeLink: "#"
+    }
+  ];
       codeLink: "#"
     }
   ];
