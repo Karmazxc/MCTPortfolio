@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { useQuery, useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { Button } from "@/components/ui/Button";
-import { Inbox, CheckCircle, Database, Search, Filter, ExternalLink, Mail, Trash2, Plus, Loader2, Award, Camera, LogOut, ShieldAlert, FileCheck } from "lucide-react";
+import { Inbox, CheckCircle, Database, Search, Filter, ExternalLink, Mail, Trash2, Plus, Loader2, Award, Camera, LogOut, ShieldAlert, FileCheck, Pencil, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function AdminDashboard() {
@@ -27,6 +27,9 @@ export default function AdminDashboard() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isDeploying, setIsDeploying] = useState(false);
 
+  // Edit Project State
+  const [editingProject, setEditingProject] = useState<any>(null);
+
   // About Proof States
   const [newProof, setNewProof] = useState({ title: "", category: "technical" });
   const [isUploadingProof, setIsUploadingProof] = useState(false);
@@ -36,6 +39,8 @@ export default function AdminDashboard() {
   const updateQuoteStatus = useMutation(api.quotations.updateStatus);
   const deleteQuote = useMutation(api.quotations.deleteQuotation);
   const createProject = useMutation(api.projects.addProject);
+  const updateProject = useMutation(api.projects.updateProject);
+  const deleteProject = useMutation(api.projects.deleteProject);
   const generateUploadUrl = useMutation(api.proofs.generateUploadUrl);
   const saveProof = useMutation(api.proofs.saveProof);
   const deleteProof = useMutation(api.proofs.deleteProof);
@@ -45,6 +50,7 @@ export default function AdminDashboard() {
   // Convex Queries
   const proofs = useQuery(api.proofs.getProofs, {}) || [];
   const logs = useQuery(api.logs ? api.logs.getLogs : api.proofs.getProofs, {}) || [];
+  const dbProjects = useQuery(api.projects.getProjects) || [];
   
   /*
 # Portfolio Refinement & Phase 5: Payment Proofs
@@ -286,22 +292,27 @@ We are extending the Admin Dashboard with a secure "Payment Proof" uploader. Thi
           </div>
         </div>
       ) : activeTab === "projects" ? (
-        <div className="max-w-4xl mx-auto">
-           {/* Previous Project Form with refined styling */}
+        <div className="space-y-8">
+           {/* Project Form */}
            <div className="card-styled p-10 border-white/5 relative overflow-hidden">
-             {/* ... (rest of project form remains same) ... */}
              <div className="absolute top-0 right-0 w-64 h-64 bg-[#06b6d4]/5 rounded-full blur-[100px] pointer-events-none"></div>
-             {/* Project form content I already fixed in previous turn ... */}
-             <h2 className="text-2xl font-black text-white mb-10 uppercase tracking-[0.2em] italic border-b border-white/5 pb-6">
-                Ingest <span className="text-[#06b6d4]">New Output</span>
-             </h2>
+             <div className="flex items-center justify-between mb-6 border-b border-white/5 pb-6">
+               <h2 className="text-2xl font-black text-white uppercase tracking-[0.2em] italic">
+                  {editingProject ? "Edit Project" : "Ingest New Project"}
+               </h2>
+               {editingProject && (
+                 <button onClick={() => { setEditingProject(null); setNewProject({ title: "", description: "", category: "Web", tech: "", image: "", demoLink: "" }); }} className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 text-white/40 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors">
+                   <X size={14} /> Cancel Edit
+                 </button>
+               )}
+             </div>
 
-             <form 
+             <form
                onSubmit={async (e) => {
                  e.preventDefault();
                  setIsDeploying(true);
                  try {
-                   let finalImageUrl = newProject.image;
+                   let finalImageUrl = editingProject ? newProject.image : newProject.image;
 
                    if (uploadMode === "file" && selectedFile) {
                      const postUrl = await generateUploadUrl();
@@ -314,23 +325,42 @@ We are extending the Admin Dashboard with a secure "Payment Proof" uploader. Thi
                      finalImageUrl = storageId;
                    }
 
-                   await createProject({
-                     ...newProject,
-                     image: finalImageUrl,
-                     tech: newProject.tech.split(",").map(t => t.trim()).filter(Boolean)
-                   });
+                   const techArray = newProject.tech.split(",").map(t => t.trim()).filter(Boolean);
+
+                   if (editingProject) {
+                     await updateProject({
+                       id: editingProject._id,
+                       title: newProject.title,
+                       description: newProject.description,
+                       category: newProject.category,
+                       tech: techArray,
+                       image: finalImageUrl,
+                       demoLink: newProject.demoLink,
+                     });
+                     alert("Project updated successfully!");
+                     setEditingProject(null);
+                   } else {
+                     await createProject({
+                       title: newProject.title,
+                       description: newProject.description,
+                       category: newProject.category,
+                       tech: techArray,
+                       image: finalImageUrl,
+                       demoLink: newProject.demoLink,
+                     });
+                     alert("Project added successfully!");
+                   }
                    setNewProject({ title: "", description: "", category: "Web", tech: "", image: "", demoLink: "" });
                    setSelectedFile(null);
-                   alert("Project deployed successfully!");
+                   setUploadMode("url");
                  } catch (err) {
-                   alert("Error deploying project: " + err.message);
+                   alert("Error: " + (err instanceof Error ? err.message : String(err)));
                  } finally {
                    setIsDeploying(false);
                  }
                }}
                className="grid grid-cols-1 md:grid-cols-2 gap-8"
              >
-                 {/* ... project form inputs ... */}
                  <div className="md:col-span-2 space-y-2">
                    <label className="text-[10px] font-black text-white/30 uppercase tracking-widest">Project Title</label>
                    <input required value={newProject.title} onChange={e => setNewProject({...newProject, title: e.target.value})} className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white text-sm focus:border-[#06b6d4]/50 focus:outline-none transition-all" />
@@ -344,7 +374,7 @@ We are extending the Admin Dashboard with a secure "Payment Proof" uploader. Thi
                    <select value={newProject.category} onChange={e => setNewProject({...newProject, category: e.target.value})} className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white text-sm focus:border-[#06b6d4]/50 focus:outline-none appearance-none uppercase font-black">
                      <option className="bg-[#0F172A] text-white" value="Web">Web Engine</option>
                      <option className="bg-[#0F172A] text-white" value="Mobile">Mobile Hub</option>
-                     <option className="bg-[#0F172A] text-white" value="Thesis">Academic Thesis</option>
+                     <option className="bg-[#0F172A] text-white" value="Thesis Systems">Academic Thesis</option>
                    </select>
                  </div>
                  <div className="space-y-2">
@@ -369,10 +399,67 @@ We are extending the Admin Dashboard with a secure "Payment Proof" uploader. Thi
                  </div>
                  <div className="pt-6 md:col-span-2">
                    <Button disabled={isDeploying} variant="cyan" className="w-full py-5 text-[11px] font-black tracking-[0.3em] uppercase rounded-xl bg-[#06b6d4] text-black">
-                      {isDeploying ? <Loader2 className="animate-spin" /> : <Plus size={16} />} Deploy Update
+                      {isDeploying ? <Loader2 className="animate-spin" /> : editingProject ? <Pencil size={16} /> : <Plus size={16} />} {editingProject ? "Update Project" : "Add Project"}
                    </Button>
                  </div>
              </form>
+           </div>
+
+           {/* Existing Projects List */}
+           <div className="card-styled p-8 border-white/5">
+             <h3 className="text-lg font-black text-white uppercase tracking-widest mb-6 border-b border-white/5 pb-4">Existing Projects</h3>
+             {dbProjects.length === 0 ? (
+               <p className="text-white/40 text-sm text-center py-8">No projects in database yet.</p>
+             ) : (
+               <div className="space-y-4">
+                 {dbProjects.map((project: any) => (
+                   <div key={project._id} className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/5 hover:border-[#06b6d4]/30 transition-all">
+                     <div className="flex items-center gap-4">
+                       {project.image && (
+                         <img src={project.image} alt={project.title} className="w-16 h-16 rounded-lg object-cover bg-[#1E293B]" />
+                       )}
+                       <div>
+                         <h4 className="font-black text-white text-sm">{project.title}</h4>
+                         <p className="text-white/40 text-xs">{project.category}</p>
+                       </div>
+                     </div>
+                     <div className="flex items-center gap-2">
+                       <button
+                         onClick={() => {
+                           setNewProject({
+                             title: project.title,
+                             description: project.description,
+                             category: project.category,
+                             tech: Array.isArray(project.tech) ? project.tech.join(", ") : project.tech || "",
+                             image: project.image || "",
+                             demoLink: project.demoLink || "",
+                           });
+                           setEditingProject(project);
+                         }}
+                         className="p-2 rounded-lg bg-[#06b6d4]/10 text-[#06b6d4] hover:bg-[#06b6d4]/20 transition-colors"
+                       >
+                         <Pencil size={16} />
+                       </button>
+                       <button
+                         onClick={async () => {
+                           if (confirm(`Delete "${project.title}"?`)) {
+                             try {
+                               await deleteProject({ id: project._id });
+                               alert("Project deleted");
+                             } catch (err) {
+                               alert("Error deleting: " + (err instanceof Error ? err.message : String(err)));
+                             }
+                           }
+                         }}
+                         className="p-2 rounded-lg bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-colors"
+                       >
+                         <Trash2 size={16} />
+                       </button>
+                     </div>
+                   </div>
+                 ))}
+               </div>
+             )}
            </div>
         </div>
       ) : activeTab === "about" ? (
