@@ -36,7 +36,7 @@ export default function ProjectsPage() {
       category: "Web",
       year: "2024",
       tech: ["Next.js", "Tailwind", "Convex", "Analytics", "Chat"],
-      image: "https://shot.screenshotapi.net/screenshot?url=https://manila-pro.vercel.app&width=800&height=600&fresh=true",
+      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=800&auto=format&fit=crop",
       demoLink: "https://manila-pro.vercel.app/",
       codeLink: "#"
     },
@@ -46,7 +46,7 @@ export default function ProjectsPage() {
       category: "Web",
       year: "2024",
       tech: ["Next.js", "Mapping API", "Tailwind", "PostgreSQL"],
-      image: "https://shot.screenshotapi.net/screenshot?url=https://www.agrimapper.online&width=800&height=600&fresh=true",
+      image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=800&auto=format&fit=crop",
       demoLink: "https://www.agrimapper.online/",
       codeLink: "#"
     },
@@ -56,7 +56,7 @@ export default function ProjectsPage() {
       category: "Thesis Systems",
       year: "2024",
       tech: ["Next.js", "Express", "MongoDB", "Recommender System"],
-      image: "https://shot.screenshotapi.net/screenshot?url=https://e-sms.vercel.app&width=800&height=600&fresh=true",
+      image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop",
       demoLink: "https://e-sms.vercel.app/",
       codeLink: "#"
     },
@@ -66,7 +66,7 @@ export default function ProjectsPage() {
       category: "Web",
       year: "2024",
       tech: ["Next.js", "Tailwind", "Forecasting", "POS Integration"],
-      image: "https://shot.screenshotapi.net/screenshot?url=https://maristela-restaurant.vercel.app&width=800&height=600&fresh=true",
+      image: "https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=800&auto=format&fit=crop",
       demoLink: "https://maristela-restaurant.vercel.app/",
       codeLink: "#"
     },
@@ -76,7 +76,7 @@ export default function ProjectsPage() {
       category: "Web",
       year: "2024",
       tech: ["Next.js", "Tailwind", "PostgreSQL", "Payroll Processing"],
-      image: "https://shot.screenshotapi.net/screenshot?url=https://a1-agro-fertilizers-payroll-system.vercel.app&width=800&height=600&fresh=true",
+      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=800&auto=format&fit=crop",
       demoLink: "https://a1-agro-fertilizers-payroll-system.vercel.app/",
       codeLink: "#"
     },
@@ -86,7 +86,7 @@ export default function ProjectsPage() {
       category: "Web",
       year: "2025",
       tech: ["Next.js", "Tailwind", "Game Logic", "Card System"],
-      image: "https://shot.screenshotapi.net/screenshot?url=https://www.naraveltales.online&width=800&height=600&fresh=true",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop",
       demoLink: "https://www.naraveltales.online/",
       codeLink: "#"
     },
@@ -96,7 +96,7 @@ export default function ProjectsPage() {
       category: "Mobile",
       year: "2025",
       tech: ["Godot", "2D Game", "Educational", "Filipino Literature"],
-      image: "https://shot.screenshotapi.net/screenshot?url=https://filipiknow-teacher-portal.vercel.app&width=800&height=600&fresh=true",
+      image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?q=80&w=800&auto=format&fit=crop",
       demoLink: "https://filipiknow-teacher-portal.vercel.app/",
       codeLink: "#"
     },
