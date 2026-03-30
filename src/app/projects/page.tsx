@@ -131,9 +131,6 @@ export default function ProjectsPage() {
       codeLink: "#"
     }
   ];
-      codeLink: "#"
-    }
-  ];
 
   // Combine fetched projects with initial hardcoded projects
   const allProjects = [...dbProjects, ...initialProjects];
