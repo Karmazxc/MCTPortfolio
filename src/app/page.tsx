@@ -1,48 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { useQuery } from "convex/react";
-import { api } from "../../convex/_generated/api";
-import { 
-  GraduationCap, 
-  Timer, 
-  ShieldCheck, 
-  Star, 
-  MessageSquare, 
-  Facebook, 
-  Mail, 
-  CheckCircle2, 
+import {
+  ShieldCheck,
+  Star,
+  MessageSquare,
+  Facebook,
+  Mail,
   Zap,
   ArrowRight,
-  ChevronLeft,
-  ChevronRight,
   Lock
 } from "lucide-react";
-import { STATS, PRICING, TIMELINES } from "@/lib/constants";
+import { PRICING, TIMELINES } from "@/lib/constants";
 
 export default function HomePage() {
-  const [activeOutputTab, setActiveOutputTab] = useState("All");
-
-  // Fetch projects from Convex database
-  const dbProjects = useQuery(api.projects.getProjects) || [];
-
-  // Map to display format
-  const recentProjects = dbProjects.slice(0, 6).map((p: any) => ({
-    type: p.category === "Thesis Systems" ? "Thesis & Research" : p.category === "Mobile" ? "Mobile App" : "Systems & Web",
-    tag: p.category === "Thesis Systems" ? "THESIS" : p.category === "Mobile" ? "MOBILE" : "WEB",
-    title: p.title,
-    desc: p.description,
-    image: p.image || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
-    link: p.demoLink || "/projects",
-    year: p.year || "2024"
-  }));
-
-  const displayOutputs = activeOutputTab === "All"
-    ? recentProjects
-    : recentProjects.filter(o => o.type === activeOutputTab);
-
   return (
     <div className="min-h-screen">
       {/* HERO SECTION */}
@@ -140,76 +113,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SERVICES NOW MOVED TO /services */}
-
-      {/* RECENT PROJECTS */}
-      <section className="container mx-auto px-6 py-20 max-w-7xl">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12">
-          <div>
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-2">Recent Projects</h2>
-            <p className="text-white/60 font-medium">A glimpse of quality work and code.</p>
-          </div>
-          <div className="flex bg-[#0F172A] border border-[#1E293B] rounded-xl p-1 mt-6 md:mt-0 gap-1">
-            <button
-              onClick={() => setActiveOutputTab("All")}
-              className={`px-6 py-2 rounded-lg text-xs font-bold uppercase tracking-widest transition-colors ${activeOutputTab === "All" ? "bg-[#06b6d4] text-[#0F172A]" : "text-white/70 hover:text-white"}`}
-            >
-              All
-            </button>
-            <button
-              onClick={() => setActiveOutputTab("Systems & Web")}
-              className={`px-6 py-2 rounded-lg text-xs font-bold uppercase tracking-widest transition-colors ${activeOutputTab === "Systems & Web" ? "bg-[#06b6d4] text-[#0F172A]" : "text-white/70 hover:text-white"}`}
-            >
-              Systems & Web
-            </button>
-            <button
-              onClick={() => setActiveOutputTab("Thesis & Research")}
-              className={`px-6 py-2 rounded-lg text-xs font-bold uppercase tracking-widest transition-colors ${activeOutputTab === "Thesis & Research" ? "bg-[#06b6d4] text-[#0F172A]" : "text-white/70 hover:text-white"}`}
-            >
-              Thesis
-            </button>
-            <button
-              onClick={() => setActiveOutputTab("Mobile App")}
-              className={`px-6 py-2 rounded-lg text-xs font-bold uppercase tracking-widest transition-colors ${activeOutputTab === "Mobile App" ? "bg-[#06b6d4] text-[#0F172A]" : "text-white/70 hover:text-white"}`}
-            >
-              Mobile
-            </button>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[400px]">
-          {displayOutputs.map((item: any, idx: number) => (
-            <div key={idx} className="card-styled overflow-hidden group flex flex-col h-full fade-in zoom-in duration-500">
-              <div className="h-48 bg-[#1E293B] overflow-hidden relative flex-shrink-0">
-                <div className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style={{ backgroundImage: `url('${item.image}')` }}></div>
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] to-transparent opacity-80"></div>
-                <div className="absolute top-4 right-4 px-2 py-1 rounded bg-[#0A0F1C]/80 backdrop-blur-sm border border-white/5 text-[10px] font-black text-white uppercase tracking-widest">{item.year}</div>
-              </div>
-              <div className="p-8 flex flex-col flex-grow">
-                <div>
-                  <span className="inline-block px-2 py-1 bg-[#06b6d4]/10 border border-[#06b6d4]/20 text-[#06b6d4] text-[10px] font-black tracking-widest uppercase rounded mb-4">{item.tag}</span>
-                  <h3 className="text-2xl font-black text-white mb-3">{item.title}</h3>
-                  <p className="text-sm text-white/60 mb-8 leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-                <div className="mt-auto">
-                  <Link href={item.link} className="text-xs font-black text-[#06b6d4] tracking-widest uppercase hover:text-white transition-colors flex items-center gap-2 w-fit group/link">
-                    VIEW DETAILS <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-12 flex justify-center">
-          <Link href="/projects" className="group text-sm font-black text-[#06b6d4] tracking-widest uppercase flex items-center gap-2 hover:text-white transition-colors">
-            View All Projects <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </div>
-      </section>
-
       {/* CLIENT TESTIMONIALS */}
       <section className="container mx-auto px-6 py-20 max-w-7xl">
         <div className="text-center mb-12">
@@ -247,7 +150,7 @@ export default function HomePage() {
                   <Star key={i} size={14} className="text-[#fbbf24] fill-[#fbbf24]" />
                 ))}
               </div>
-              <p className="text-sm text-white/70 leading-relaxed italic flex-grow">"{testimonial.quote}"</p>
+              <p className="text-sm text-white/70 leading-relaxed italic flex-grow">&ldquo;{testimonial.quote}&rdquo;</p>
               <div className="border-t border-white/5 pt-6">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#06b6d4] to-[#a855f7] flex items-center justify-center">
@@ -420,7 +323,7 @@ export default function HomePage() {
           
           <div className="flex-1 space-y-8 relative z-10 w-full">
             <h2 className="text-5xl md:text-6xl font-black italic tracking-tighter leading-none text-white">
-              Let's Build Something<br/>
+              Let&apos;s Build Something<br/>
               <span className="text-[#06b6d4]">Great Together.</span>
             </h2>
             
