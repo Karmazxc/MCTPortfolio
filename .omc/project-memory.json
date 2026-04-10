@@ -1,0 +1,270 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1775233205199,
+  "projectRoot": "D:\\Code Builds\\New project",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "tsconfig.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "next",
+        "version": "16.2.1",
+        "category": "fullstack"
+      },
+      {
+        "name": "react",
+        "version": "19.2.4",
+        "category": "frontend"
+      },
+      {
+        "name": "react-dom",
+        "version": "19.2.4",
+        "category": "frontend"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": "npm run build",
+    "testCommand": null,
+    "lintCommand": "npm run lint",
+    "devCommand": "npm run dev",
+    "scripts": {
+      "dev": "next dev",
+      "build": "next build",
+      "start": "next start",
+      "lint": "eslint"
+    }
+  },
+  "conventions": {
+    "namingStyle": "camelCase",
+    "importStyle": "ES modules",
+    "testPattern": null,
+    "fileOrganization": "type-based"
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "public",
+      "scripts",
+      "src"
+    ],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "convex": {
+      "path": "convex",
+      "purpose": null,
+      "fileCount": 9,
+      "lastAccessed": 1775233204993,
+      "keyFiles": [
+        "files.ts",
+        "http.ts",
+        "logs.ts",
+        "payments.ts",
+        "projects.ts"
+      ]
+    },
+    "public": {
+      "path": "public",
+      "purpose": "Public files",
+      "fileCount": 6,
+      "lastAccessed": 1775233205020,
+      "keyFiles": [
+        "file.svg",
+        "globe.svg",
+        "next.svg",
+        "profile.png",
+        "vercel.svg"
+      ]
+    },
+    "scripts": {
+      "path": "scripts",
+      "purpose": "Build/utility scripts",
+      "fileCount": 1,
+      "lastAccessed": 1775233205021,
+      "keyFiles": [
+        "verify-admin-login.ps1"
+      ]
+    },
+    "skills": {
+      "path": "skills",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1775233205022,
+      "keyFiles": []
+    },
+    "src": {
+      "path": "src",
+      "purpose": "Source code",
+      "fileCount": 1,
+      "lastAccessed": 1775233205026,
+      "keyFiles": [
+        "middleware.ts"
+      ]
+    },
+    "src\\app": {
+      "path": "src\\app",
+      "purpose": "Application code",
+      "fileCount": 4,
+      "lastAccessed": 1775233205046,
+      "keyFiles": [
+        "favicon.ico",
+        "globals.css",
+        "layout.tsx"
+      ]
+    },
+    "src\\components": {
+      "path": "src\\components",
+      "purpose": "UI components",
+      "fileCount": 7,
+      "lastAccessed": 1775233205050,
+      "keyFiles": [
+        "ConvexClientProvider.tsx",
+        "Footer.tsx",
+        "HeroCard.tsx"
+      ]
+    },
+    "src\\lib": {
+      "path": "src\\lib",
+      "purpose": "Library code",
+      "fileCount": 3,
+      "lastAccessed": 1775233205067,
+      "keyFiles": [
+        "constants.ts",
+        "homeProjectDisplay.test.ts",
+        "homeProjectDisplay.ts"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "src\\app\\page.tsx",
+      "accessCount": 11,
+      "lastAccessed": 1775236924918,
+      "type": "file"
+    },
+    {
+      "path": "src\\lib\\homeProjectDisplay.ts",
+      "accessCount": 6,
+      "lastAccessed": 1775234365766,
+      "type": "file"
+    },
+    {
+      "path": ".env.local",
+      "accessCount": 6,
+      "lastAccessed": 1775234501373,
+      "type": "file"
+    },
+    {
+      "path": "src\\app\\contact\\page.tsx",
+      "accessCount": 5,
+      "lastAccessed": 1775234326009,
+      "type": "file"
+    },
+    {
+      "path": "src\\app\\admin\\page.tsx",
+      "accessCount": 5,
+      "lastAccessed": 1775235384377,
+      "type": "file"
+    },
+    {
+      "path": "convex\\quotations.ts",
+      "accessCount": 2,
+      "lastAccessed": 1775233807763,
+      "type": "file"
+    },
+    {
+      "path": "convex\\sendEmail.ts",
+      "accessCount": 2,
+      "lastAccessed": 1775234279435,
+      "type": "file"
+    },
+    {
+      "path": "convex",
+      "accessCount": 1,
+      "lastAccessed": 1775233724194,
+      "type": "directory"
+    },
+    {
+      "path": "convex\\projects.ts",
+      "accessCount": 1,
+      "lastAccessed": 1775233732350,
+      "type": "file"
+    },
+    {
+      "path": "convex\\_generated\\ai\\guidelines.md",
+      "accessCount": 1,
+      "lastAccessed": 1775233732379,
+      "type": "file"
+    },
+    {
+      "path": "convex\\schema.ts",
+      "accessCount": 1,
+      "lastAccessed": 1775233807802,
+      "type": "file"
+    },
+    {
+      "path": "package.json",
+      "accessCount": 1,
+      "lastAccessed": 1775233807964,
+      "type": "file"
+    },
+    {
+      "path": "convex\\logs.ts",
+      "accessCount": 1,
+      "lastAccessed": 1775233808004,
+      "type": "file"
+    },
+    {
+      "path": "src\\lib\\constants.ts",
+      "accessCount": 1,
+      "lastAccessed": 1775233808215,
+      "type": "file"
+    },
+    {
+      "path": "src\\components\\ServicesTabs.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1775233823771,
+      "type": "file"
+    },
+    {
+      "path": ".env.local.example",
+      "accessCount": 1,
+      "lastAccessed": 1775233878460,
+      "type": "file"
+    },
+    {
+      "path": "C:\\Users\\xtian\\.claude\\plans\\reflective-popping-melody.md",
+      "accessCount": 1,
+      "lastAccessed": 1775233917304,
+      "type": "file"
+    },
+    {
+      "path": "src\\app\\layout.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1775235410767,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

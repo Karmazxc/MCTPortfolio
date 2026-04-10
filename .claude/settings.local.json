@@ -10,7 +10,12 @@
       "Bash(vercel:*)",
       "Bash(git push:*)",
       "Bash(npx convex:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(ls -la .env*)",
+      "Bash(cd:*)",
+      "Bash(npx cross-env:*)",
+      "Bash(npm run:*)",
+      "Bash(tasklist)"
     ]
   }
 }
