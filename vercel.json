@@ -1,0 +1,10 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
+  "env": {
+    "NEXT_PUBLIC_CONVEX_URL": "https://good-giraffe-568.convex.cloud",
+    "NEXT_PUBLIC_CONVEX_SITE_URL": "https://good-giraffe-568.convex.site",
+    "CONVEX_DEPLOYMENT": "dev:good-giraffe-568"
+  }
+}
