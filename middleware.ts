@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 import { jwtVerify } from "jose";
 
 const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET || "default_secret_123");
-const ADMIN_SLUG = process.env.ADMIN_SLUG || "admin-portal";
+const ADMIN_SLUG = process.env.ADMIN_SLUG || "mark-admin-2026";
 
 // Simple in-memory rate limiting for Edge Runtime (resets on worker restart)
 const ipCache = new Map<string, { count: number; lastReset: number }>();
@@ -19,7 +19,7 @@ export async function middleware(request: NextRequest) {
     const maxAttempts = 5;
 
     const record = ipCache.get(ip) || { count: 0, lastReset: now };
-    
+
     if (now - record.lastReset > windowMs) {
       record.count = 0;
       record.lastReset = now;
@@ -34,17 +34,18 @@ export async function middleware(request: NextRequest) {
   }
 
   // 2. SESSION CHECK for Dashboard
-  if (pathname.startsWith("/admin")) {
+  if (pathname === "/admin" || pathname.startsWith("/admin/")) {
     const token = request.cookies.get("admin_session")?.value;
 
     if (!token) {
+      // Redirect to login portal
       return NextResponse.redirect(new URL(`/portal/${ADMIN_SLUG}`, request.url));
     }
 
     try {
       await jwtVerify(token, JWT_SECRET);
       return NextResponse.next();
-    } catch (err) {
+    } catch {
       return NextResponse.redirect(new URL(`/portal/${ADMIN_SLUG}`, request.url));
     }
   }
