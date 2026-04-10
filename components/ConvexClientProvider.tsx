@@ -1,25 +1,21 @@
 "use client";
 
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
 import { ConvexProvider, ConvexReactClient } from "convex/react";
 
+// Initialize Convex client immediately with the env var
+// This ensures it's available during SSR/hydration
+const convexUrl = process.env.NEXT_PUBLIC_CONVEX_URL;
+const isValidUrl = convexUrl && !convexUrl.includes("placeholder") && !convexUrl.includes("happy-monkey") && !convexUrl.includes("missing") && !convexUrl.includes("undefined");
+
+const convex = isValidUrl ? new ConvexReactClient(convexUrl) : null;
+
 export default function ConvexClientProvider({ children }: { children: ReactNode }) {
-  const [convex, setConvex] = useState<ConvexReactClient | null>(null);
-
-  useEffect(() => {
-    const convexUrl = process.env.NEXT_PUBLIC_CONVEX_URL;
-    
-    // Only initialize if we have a valid URL
-    if (convexUrl && !convexUrl.includes("placeholder") && !convexUrl.includes("happy-monkey") && !convexUrl.includes("missing")) {
-      setConvex(new ConvexReactClient(convexUrl));
-    }
-  }, []);
-
-  // Render children without Convex if URL is missing (shows warnings in UI)
   if (!convex) {
     if (process.env.NODE_ENV === "development") {
       console.warn("⚠️ CONVEX_URL is missing or invalid. Please set NEXT_PUBLIC_CONVEX_URL in your .env.local file.");
     }
+    // Render children without Convex - pages using Convex will show loading/empty states
     return <>{children}</>;
   }
 
