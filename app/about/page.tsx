@@ -29,6 +29,7 @@ import { api } from "@/backend/convex/_generated/api";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { STATS, PRICING, CONTACT } from "@/lib/constants";
+import ConnectionWarning from "@/components/ConnectionWarning";
 
 // Demo/placeholder proof cards to showcase the layout
 const DEMO_PROOFS = [
@@ -102,17 +103,23 @@ function timeAgo(timestamp: number): string {
 }
 
 export default function AboutPage() {
-  const proofs = useQuery(api.proofs.getProofs, {}) || [];
-  // Show demo proofs if no real proofs exist
+  // useQuery returns undefined on error, fallback to empty array
+  const proofs = useQuery(api.proofs.proofs.getProofs, {}) ?? [];
+  
+  // Show demo proofs if no real proofs exist or if there's an error
   const displayProofs = proofs.length > 0 ? proofs : DEMO_PROOFS;
   const [carouselIndex, setCarouselIndex] = React.useState(0);
-  
+
   // Calculate stats from proofs
   const totalTransactions = displayProofs.length;
   const verifiedCount = displayProofs.filter((p: any) => p.status === "verified").length;
   
   return (
     <div className="container mx-auto px-6 py-24 max-w-6xl">
+      {/* Connection Warning */}
+      <ConnectionWarning 
+        message="Unable to connect to our database. Showing cached/demo content. Some features may be limited."
+      />
 
       {/* STATS OVERVIEW */}
       <section className="mb-20">

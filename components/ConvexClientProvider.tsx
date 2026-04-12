@@ -1,14 +1,62 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, createContext, useContext, useEffect, useState } from "react";
 import { ConvexProvider, ConvexReactClient } from "convex/react";
+import { validateConvexUrl } from "@/lib/convex-config";
 
-// Initialize Convex client immediately with the env var
-// This ensures it's available during SSR/hydration
-const convexUrl = process.env.NEXT_PUBLIC_CONVEX_URL;
-const isValidUrl = convexUrl && !convexUrl.includes("placeholder") && !convexUrl.includes("happy-monkey") && !convexUrl.includes("missing") && !convexUrl.includes("undefined");
+type ConvexContextType = {
+  isConnected: boolean;
+  connectionError: Error | null;
+  retry: () => void;
+};
 
-const convex = isValidUrl ? new ConvexReactClient(convexUrl) : null;
+const ConvexContext = createContext<ConvexContextType>({
+  isConnected: false,
+  connectionError: null,
+  retry: () => {},
+});
+
+export function useConvexConnection() {
+  return useContext(ConvexContext);
+}
+
+// Initialize Convex client with validated URL
+const convexUrl = validateConvexUrl(process.env.NEXT_PUBLIC_CONVEX_URL);
+const convex = convexUrl ? new ConvexReactClient(convexUrl) : null;
+
+// ConvexStatus component to track connection
+function ConvexStatus({ children }: { children: ReactNode }) {
+  const [isConnected, setIsConnected] = useState(true);
+  const [connectionError, setConnectionError] = useState<Error | null>(null);
+  const [retryCount, setRetryCount] = useState(0);
+
+  useEffect(() => {
+    if (!convex) {
+      setConnectionError(new Error("Convex URL is not configured"));
+      setIsConnected(false);
+      return;
+    }
+
+    // Convex handles connection state internally via hooks
+    // We just need to track if the client was initialized successfully
+    setIsConnected(true);
+    setConnectionError(null);
+
+    return () => {
+      // Cleanup if needed
+    };
+  }, [retryCount]);
+
+  const retry = () => {
+    setRetryCount(c => c + 1);
+  };
+
+  return (
+    <ConvexContext.Provider value={{ isConnected, connectionError, retry }}>
+      {children}
+    </ConvexContext.Provider>
+  );
+}
 
 export default function ConvexClientProvider({ children }: { children: ReactNode }) {
   if (!convex) {
@@ -16,8 +64,16 @@ export default function ConvexClientProvider({ children }: { children: ReactNode
       console.warn("⚠️ CONVEX_URL is missing or invalid. Please set NEXT_PUBLIC_CONVEX_URL in your .env.local file.");
     }
     // Render children without Convex - pages using Convex will show loading/empty states
-    return <>{children}</>;
+    return (
+      <ConvexContext.Provider value={{ isConnected: false, connectionError: new Error("Convex not configured"), retry: () => {} }}>
+        {children}
+      </ConvexContext.Provider>
+    );
   }
 
-  return <ConvexProvider client={convex}>{children}</ConvexProvider>;
+  return (
+    <ConvexProvider client={convex}>
+      <ConvexStatus>{children}</ConvexStatus>
+    </ConvexProvider>
+  );
 }

@@ -16,11 +16,11 @@ export function PaymentProofUploader({ quoteId }: PaymentProofUploaderProps) {
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const generateUploadUrl = useMutation(api.files.generateUploadUrl);
-  const savePaymentProof = useMutation(api.payments.savePaymentProof);
-  const updateProofStatus = useMutation(api.payments.updateProofStatus);
+  const generateUploadUrl = useMutation(api.files.files.generateUploadUrl);
+  const savePaymentProof = useMutation(api.payments.payments.savePaymentProof);
+  const updateProofStatus = useMutation(api.payments.payments.updateProofStatus);
   const proofs = useQuery(
-    api.payments.getPaymentProofs, 
+    api.payments.payments.getPaymentProofs,
     typeof quoteId === "string" && quoteId.startsWith("offline_") ? "skip" : { quoteId }
   );
 

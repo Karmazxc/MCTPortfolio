@@ -1,6 +1,0 @@
-{
-  "functions": "backend/convex/",
-  "node": {
-    "externalPackages": ["jose"]
-  }
-}

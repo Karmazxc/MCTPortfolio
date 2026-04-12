@@ -21,8 +21,8 @@ export default function QuotePage() {
     details: "",
     honeypot: ""
   });
-  const saveQuotation = useMutation(api.quotations.saveQuotation);
-  const sendEmailNotification = useAction(api.sendEmail.sendQuotationNotification);
+  const saveQuotation = useMutation(api.quotations.quotations.saveQuotation);
+  const sendEmailNotification = useAction(api.emails.sendEmail.sendQuotationNotification);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -36,7 +36,7 @@ export default function ProjectsPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Convex Queries and Mutations
-  const dbProjects = useQuery(api.projects.getProjects) || [];
+  const dbProjects = useQuery(api.projects.projects.getProjects) || [];
 
   const categories = ["All", "Web", "Mobile", "Thesis Systems"];
   

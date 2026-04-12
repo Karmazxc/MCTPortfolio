@@ -45,26 +45,26 @@ export default function AdminDashboard() {
   const [viewingProofsForQuote, setViewingProofsForQuote] = useState<string | null>(null);
   
   // Convex Mutations
-  const updateQuoteStatus = useMutation(api.quotations.updateStatus);
-  const deleteQuote = useMutation(api.quotations.deleteQuotation);
-  const createProject = useMutation(api.projects.addProject);
-  const updateProject = useMutation(api.projects.updateProject);
-  const deleteProject = useMutation(api.projects.deleteProject);
-  const generateUploadUrl = useMutation(api.proofs.generateUploadUrl);
-  const saveProof = useMutation(api.proofs.saveProof);
-  const deleteProof = useMutation(api.proofs.deleteProof);
+  const updateQuoteStatus = useMutation(api.quotations.quotations.updateStatus);
+  const deleteQuote = useMutation(api.quotations.quotations.deleteQuotation);
+  const createProject = useMutation(api.projects.projects.addProject);
+  const updateProject = useMutation(api.projects.projects.updateProject);
+  const deleteProject = useMutation(api.projects.projects.deleteProject);
+  const generateUploadUrl = useMutation(api.proofs.proofs.generateUploadUrl);
+  const saveProof = useMutation(api.proofs.proofs.saveProof);
+  const deleteProof = useMutation(api.proofs.proofs.deleteProof);
   // Payment proof mutations
-  const savePaymentProof = useMutation(api.payments.savePaymentProof);
-  const updatePaymentProofStatus = useMutation(api.payments.updateProofStatus);
-  const deletePaymentProof = useMutation(api.payments.deletePaymentProof);
+  const savePaymentProof = useMutation(api.payments.payments.savePaymentProof);
+  const updatePaymentProofStatus = useMutation(api.payments.payments.updateProofStatus);
+  const deletePaymentProof = useMutation(api.payments.payments.deletePaymentProof);
   // Fallback to saveProof hook reference if logs aren't generated yet to prevent useMutation(undefined) crash
-  const addLog = useMutation(api.logs ? api.logs.addLog : api.proofs.saveProof);
+  const addLog = useMutation(api.logs ? api.logs.logs.addLog : api.proofs.proofs.saveProof);
 
   // Convex Queries
-  const proofs = useQuery(api.proofs.getProofs, {}) || [];
-  const allPaymentProofs = useQuery(api.payments.getAllPaymentProofs, {}) || [];
-  const logs = useQuery(api.logs ? api.logs.getLogs : api.proofs.getProofs, {}) || [];
-  const dbProjects = useQuery(api.projects.getProjects) || [];
+  const proofs = useQuery(api.proofs.proofs.getProofs, {}) || [];
+  const allPaymentProofs = useQuery(api.payments.payments.getAllPaymentProofs, {}) || [];
+  const logs = useQuery(api.logs ? api.logs.logs.getLogs : api.proofs.proofs.getProofs, {}) || [];
+  const dbProjects = useQuery(api.projects.projects.getProjects) || [];
   
   /*
 # Portfolio Refinement & Phase 5: Payment Proofs
