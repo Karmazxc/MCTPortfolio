@@ -1,11 +1,24 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { LayoutTemplate, Smartphone, BookOpen, BarChart3, Palette, CheckCircle2, Zap } from "lucide-react";
 import { PRICING, TIMELINES } from "@/lib/constants";
 
 export function ServicesTabs() {
   const [activeTab, setActiveTab] = useState(0);
+  const [tooltipOpen, setTooltipOpen] = useState(false);
+  const tooltipRef = useRef<HTMLDivElement>(null);
+
+  // Close tooltip on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (tooltipRef.current && !tooltipRef.current.contains(event.target as Node)) {
+        setTooltipOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const services = [
     {
@@ -163,9 +176,29 @@ export function ServicesTabs() {
            <div className="card-styled p-8 border-[#1E293B]">
                 <div className="flex flex-col gap-1">
                   <span className="text-3xl font-black text-white">{active.pricing}</span>
-                  <div className="group relative w-fit">
-                    <span className="text-[10px] text-[#06b6d4] font-black uppercase tracking-widest cursor-help border-b border-[#06b6d4]/30">What affects pricing?</span>
-                    <div className="absolute left-0 bottom-full mb-2 w-64 p-4 bg-[#0F172A] border border-[#1E293B] rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-20">
+                  <div className="relative w-fit" ref={tooltipRef}>
+                    <span
+                      className="text-[10px] text-[#06b6d4] font-black uppercase tracking-widest cursor-help border-b border-[#06b6d4]/30"
+                      onClick={() => setTooltipOpen(!tooltipOpen)}
+                      onMouseEnter={() => setTooltipOpen(true)}
+                      onMouseLeave={() => setTooltipOpen(false)}
+                      role="button"
+                      tabIndex={0}
+                      aria-expanded={tooltipOpen}
+                      aria-label="What affects pricing? Click to learn more"
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          setTooltipOpen(!tooltipOpen);
+                        }
+                      }}
+                    >
+                      What affects pricing?
+                    </span>
+                    <div
+                      className={`absolute left-0 bottom-full mb-2 w-64 p-4 bg-[#0F172A] border border-[#1E293B] rounded-xl shadow-2xl transition-all z-20 ${
+                        tooltipOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+                      }`}
+                    >
                       <p className="text-[11px] text-white/70 leading-relaxed">
                         Pricing is determined by:
                         <br/>• Project Complexity

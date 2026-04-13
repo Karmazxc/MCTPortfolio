@@ -32,12 +32,19 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} dark antialiased`}
     >
       <body className="min-h-screen flex flex-col pt-16 md:pt-20">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only fixed top-4 left-4 z-[200] bg-[#06b6d4] text-[#0f172a] px-4 py-2 rounded-lg font-bold text-sm shadow-lg focus:outline-none focus:ring-2 focus:ring-[#06b6d4] focus:ring-offset-2 focus:ring-offset-[#0A0A0D]"
+        >
+          Skip to main content
+        </a>
+
         <ConvexClientProvider>
           {/* Ambient Global Glow matching OpenClaw */}
-          <div className="fixed top-[-20%] left-1/2 -translate-x-1/2 w-[80vw] h-[50vh] bg-[#3b82f6]/10 blur-[120px] rounded-full pointer-events-none z-[-2]"></div>
-          
+          <div className="fixed top-[-20%] left-1/2 -translate-x-1/2 w-[80vw] h-[50vh] bg-[#3b82f6]/10 blur-[120px] rounded-full pointer-events-none z-[-2]" aria-hidden="true"></div>
+
           <Navbar />
-          <main className="flex-grow">{children}</main>
+          <main id="main-content" className="flex-grow" role="main">{children}</main>
           <StickyAnnouncement />
           <Footer />
         </ConvexClientProvider>

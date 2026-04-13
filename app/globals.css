@@ -42,7 +42,7 @@
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-white to-white/50;
   }
-  
+
   .glass-card {
     @apply bg-[#0C1017]/80 backdrop-blur-xl border border-white/5 shadow-2xl;
   }
@@ -54,6 +54,21 @@
 
   .card-styled {
     @apply bg-[#0F1219] border border-[#1E293B] rounded-2xl transition-all duration-300;
+  }
+
+  /* Focus visible styles for keyboard navigation */
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#06b6d4] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0D];
+  }
+
+  /* Smooth scroll behavior */
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+
+  /* Selection styles */
+  ::selection {
+    @apply bg-[#06b6d4]/30 text-white;
   }
 }
 

@@ -533,7 +533,7 @@ We are extending the Admin Dashboard with a secure "Payment Proof" uploader. Thi
                    <input value={newProject.demoLink} onChange={e => setNewProject({...newProject, demoLink: e.target.value})} className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white text-sm" />
                  </div>
                  <div className="pt-6 md:col-span-2">
-                   <Button disabled={isDeploying} variant="cyan" className="w-full py-5 text-[11px] font-black tracking-[0.3em] uppercase rounded-xl bg-[#06b6d4] text-black">
+                   <Button disabled={isDeploying} variant="primary" className="w-full py-5 text-[11px] font-black tracking-[0.3em] uppercase rounded-xl">
                       {isDeploying ? <Loader2 className="animate-spin" /> : editingProject ? <Pencil size={16} /> : <Plus size={16} />} {editingProject ? "Update Project" : "Add Project"}
                    </Button>
                  </div>

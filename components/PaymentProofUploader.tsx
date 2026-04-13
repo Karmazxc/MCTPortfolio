@@ -102,7 +102,7 @@ export function PaymentProofUploader({ quoteId }: PaymentProofUploaderProps) {
         <Button
           onClick={handleUpload}
           disabled={!selectedFile || uploading}
-          variant="cyan"
+          variant="primary"
           className="h-12 px-8 min-w-[120px] font-black text-[10px] uppercase tracking-widest gap-2 disabled:opacity-30"
         >
           {uploading ? (

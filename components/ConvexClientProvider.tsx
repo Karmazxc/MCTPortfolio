@@ -3,6 +3,7 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from "react";
 import { ConvexProvider, ConvexReactClient } from "convex/react";
 import { validateConvexUrl } from "@/lib/convex-config";
+import ConnectionWarning from "./ConnectionWarning";
 
 type ConvexContextType = {
   isConnected: boolean;
@@ -54,6 +55,7 @@ function ConvexStatus({ children }: { children: ReactNode }) {
   return (
     <ConvexContext.Provider value={{ isConnected, connectionError, retry }}>
       {children}
+      <ConnectionWarning />
     </ConvexContext.Provider>
   );
 }
@@ -67,6 +69,7 @@ export default function ConvexClientProvider({ children }: { children: ReactNode
     return (
       <ConvexContext.Provider value={{ isConnected: false, connectionError: new Error("Convex not configured"), retry: () => {} }}>
         {children}
+        <ConnectionWarning message="Convex is not configured. Please set NEXT_PUBLIC_CONVEX_URL in your .env.local file." />
       </ConvexContext.Provider>
     );
   }

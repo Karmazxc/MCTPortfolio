@@ -255,7 +255,7 @@ export default function QuotePage() {
               </div>
 
               <div className="pt-2">
-                <Button type="submit" variant="cyan" disabled={isSubmitting || submitted} className="w-full uppercase tracking-widest text-xs py-4">
+                <Button type="submit" variant="primary" disabled={isSubmitting || submitted} className="w-full uppercase tracking-widest text-xs py-4">
                   {isSubmitting ? "Validating & Sending..." : submitted ? "Message Sent!" : "Send Message - Get Free Consultation"}
                 </Button>
                 <p className="text-[10px] tracking-widest text-white/40 mt-3 text-center">* Protected by spam filters. Minimum 20 char description.</p>

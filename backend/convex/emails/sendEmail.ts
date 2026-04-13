@@ -14,7 +14,7 @@ export const sendQuotationNotification = action({
   },
   handler: async (ctx, args) => {
     const RESEND_API_KEY = process.env.RESEND_API_KEY;
-    
+
     if (!RESEND_API_KEY) {
       console.error("RESEND_API_KEY not set — skipping email notification");
       return { success: false, reason: "no_api_key" };
@@ -28,13 +28,13 @@ export const sendQuotationNotification = action({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: "New Quotation <onboarding@resend.dev>",
+          from: "MCT.DEV Portfolio <portfolio@mct.dev>",
           to: ["trajano.mark0826@gmail.com"],
           subject: `🔥 New Quotation: ${args.clientName} - ${args.projectType}`,
           html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
               <h2 style="color: #06b6d4; border-bottom: 2px solid #06b6d4; padding-bottom: 10px;">New Quotation Request</h2>
-              
+
               <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
                 <p><strong>👤 Client Name:</strong> ${args.clientName}</p>
                 <p><strong>📧 Email:</strong> ${args.email}</p>
@@ -42,20 +42,26 @@ export const sendQuotationNotification = action({
                 <p><strong>💰 Budget:</strong> ${args.budget}</p>
                 <p><strong>📅 Deadline:</strong> ${args.deadline}</p>
               </div>
-              
+
               <div style="background: #ffffff; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0;">
                 <h3 style="color: #1e293b; margin-top: 0;">Project Details:</h3>
                 <p style="line-height: 1.6; color: #334155;">${args.details}</p>
               </div>
-              
+
               <div style="margin-top: 20px; padding: 15px; background: #fef3c7; border-left: 4px solid #fbbf24; border-radius: 4px;">
                 <p style="margin: 0; color: #92400e;"><strong>⚡ Action Required:</strong> Review this quotation request and respond within 1-2 hours.</p>
               </div>
-              
+
               <hr style="margin: 30px 0; border: none; border-top: 1px solid #e2e8f0;" />
               <p style="color: #94a3b8; font-size: 12px;">This is an automated notification from your portfolio website.</p>
             </div>
           `,
+          // Anti-spam headers
+          replyTo: args.email,
+          headers: {
+            "X-Priority": "1",
+            "X-MSMail-Priority": "High",
+          },
         }),
       });
 
@@ -73,7 +79,7 @@ export const sendQuotationNotification = action({
   },
 });
 
-// Send contact form notification (kept for compatibility)
+// Send contact form notification
 export const sendContactNotification = action({
   args: {
     name: v.string(),
@@ -96,17 +102,24 @@ export const sendContactNotification = action({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: "Portfolio Contact <onboarding@resend.dev>",
+          from: "MCT.DEV Portfolio <portfolio@mct.dev>",
           to: ["trajano.mark0826@gmail.com"],
           subject: `New Contact: ${args.name} - ${args.projectType}`,
           html: `
-            <h2>New Contact Form Submission</h2>
-            <p><strong>Name:</strong> ${args.name}</p>
-            <p><strong>Email:</strong> ${args.email}</p>
-            <p><strong>Project Type:</strong> ${args.projectType}</p>
-            <p><strong>Message:</strong></p>
-            <p>${args.message}</p>
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+              <h2 style="color: #06b6d4;">New Contact Form Submission</h2>
+              <p><strong>Name:</strong> ${args.name}</p>
+              <p><strong>Email:</strong> ${args.email}</p>
+              <p><strong>Project Type:</strong> ${args.projectType}</p>
+              <p><strong>Message:</strong></p>
+              <p style="line-height: 1.6;">${args.message}</p>
+            </div>
           `,
+          replyTo: args.email,
+          headers: {
+            "X-Priority": "1",
+            "X-MSMail-Priority": "High",
+          },
         }),
       });
 

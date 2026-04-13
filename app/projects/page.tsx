@@ -2,6 +2,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import Image from "next/image";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { ExternalLink, Github, X } from "lucide-react";
@@ -81,10 +82,13 @@ export default function ProjectsPage() {
           <div key={idx} className="card-styled overflow-hidden group flex flex-col h-full border-white/5 hover:border-[#06b6d4]/30 transition-all duration-700">
             
             <div className="h-56 bg-[#1E293B] overflow-hidden relative">
-              <div 
-                className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-[1.5s]"
-                style={{ backgroundImage: `url('${project.image}')` }}
-              ></div>
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-[1.5s]"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1C] via-[#0A0F1C]/40 to-transparent opacity-90"></div>
               
               <div className="absolute top-4 left-4">
@@ -112,7 +116,7 @@ export default function ProjectsPage() {
               <div className="flex gap-4 mt-auto">
                 {project.demoLink && project.demoLink !== "#" ? (
                   <a href={project.demoLink} target="_blank" rel="noreferrer" className="flex-1">
-                    <Button variant="cyan" size="sm" className="w-full rounded-lg uppercase tracking-widest text-[9px] font-black h-11 bg-[#06b6d4] text-[#0A0F1C] hover:shadow-[0_0_20px_rgba(6,182,212,0.4)]">
+                    <Button variant="primary" size="sm" className="w-full rounded-lg uppercase tracking-widest text-[9px] font-black h-11 hover:shadow-[0_0_20px_rgba(6,182,212,0.4)]">
                        Live Demo ↗
                     </Button>
                   </a>

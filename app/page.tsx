@@ -3,6 +3,8 @@
 import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+import { ProfileImage } from "@/components/ProfileImage";
+import { FadeIn, StaggerContainer, StaggerItem, ScaleIn } from "@/components/ui/FadeIn";
 import {
   ShieldCheck,
   Star,
@@ -14,6 +16,7 @@ import {
   Lock
 } from "lucide-react";
 import { PRICING, TIMELINES } from "@/lib/constants";
+import { TESTIMONIALS, TRUST_BADGES, TECH_STACK, CONTACT, WHATSAPP_QR_DATA, PAYMENT_METHODS } from "@/lib/site-data";
 
 export default function HomePage() {
   return (
@@ -21,60 +24,49 @@ export default function HomePage() {
       {/* HERO SECTION */}
       <section className="container mx-auto px-6 pt-20 pb-16 lg:pt-32 lg:pb-24 max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
+
           {/* Left Hero */}
           <div className="lg:col-span-8 space-y-8">
-            <div className="space-y-4">
-              <h1 className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9]">
-                <span className="italic text-white">WEB & </span>
-                <span className="text-[#06b6d4]">THESIS</span><br/>
-                <span className="text-white">CRAFTING.</span>
-              </h1>
-              <div className="border-l-2 border-[#06b6d4] pl-3 text-sm font-normal text-white/40">
-                <span className="font-bold text-white uppercase tracking-wider">High-performance software</span> meets academic excellence.
+            <FadeIn direction="up" delay={0.1}>
+              <div className="space-y-4">
+                <h1 className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9]">
+                  <span className="italic text-white">WEB & </span>
+                  <span className="text-[#06b6d4]">THESIS</span><br/>
+                  <span className="text-white">CRAFTING.</span>
+                </h1>
+                <div className="border-l-2 border-[#06b6d4] pl-3 text-sm font-normal text-white/40">
+                  <span className="font-bold text-white uppercase tracking-wider">High-performance software</span> meets academic excellence.
+                </div>
               </div>
-            </div>
-            
-            <p className="text-lg md:text-xl text-white/70 max-w-2xl leading-relaxed font-medium">
-              I build scalable digital products for businesses and provide elite, Turnitin-verified research support for graduating students. Zero compromise on quality.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Link href="/quote">
-                <Button variant="primary" size="lg" className="w-full sm:w-auto uppercase tracking-wider text-sm shadow-[0_0_30px_rgba(6,182,212,0.3)]">
-                  Get A Free Consultation ⚡
-                </Button>
-              </Link>
-              <Link href="/services" className="w-full sm:w-auto">
-                <Button variant="secondary" size="lg" className="w-full sm:w-auto uppercase tracking-wider text-sm">
-                  View My Services
-                </Button>
-              </Link>
-            </div>
+            </FadeIn>
+
+            <FadeIn direction="up" delay={0.2}>
+              <p className="text-lg md:text-xl text-white/70 max-w-2xl leading-relaxed font-medium">
+                I build scalable digital products for businesses and provide elite, Turnitin-verified research support for graduating students. Zero compromise on quality.
+              </p>
+            </FadeIn>
+
+            <FadeIn direction="up" delay={0.3}>
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <Link href="/quote">
+                  <Button variant="primary" size="lg" className="w-full sm:w-auto uppercase tracking-wider text-sm shadow-[0_0_30px_rgba(6,182,212,0.3)]">
+                    Get A Free Consultation ⚡
+                  </Button>
+                </Link>
+                <Link href="/services" className="w-full sm:w-auto">
+                  <Button variant="secondary" size="lg" className="w-full sm:w-auto uppercase tracking-wider text-sm">
+                    View My Services
+                  </Button>
+                </Link>
+              </div>
+            </FadeIn>
           </div>
 
           {/* Right Hero - Profile Card */}
           <div className="lg:col-span-4 flex justify-center lg:justify-end">
             <div className="w-full max-w-[320px] aspect-[3/4] rounded-3xl bg-gradient-to-t from-[#0F172A] to-[#1E293B] p-1 border border-[#1E293B] relative overflow-hidden group shadow-2xl">
-              {/* Image Placeholder - User should replace with actual image */}
               <div className="w-full h-full rounded-[20px] bg-[#0B1121] flex items-center justify-center overflow-hidden relative">
-                 <img
-                   src="/profile.png"
-                   alt="Mark Christian Trajano"
-                   className="w-full h-full object-cover object-center"
-                   onError={(e) => {
-                     // Fallback to initials if no photo exists
-                     const target = e.target as HTMLImageElement;
-                     target.style.display = 'none';
-                     const parent = target.parentElement;
-                     if (parent) {
-                       const initials = document.createElement('div');
-                       initials.className = 'w-full h-full flex items-center justify-center bg-gradient-to-br from-[#06b6d4] to-[#0F172A]';
-                       initials.innerHTML = '<span class="text-4xl font-black text-white">MCT</span>';
-                       parent.appendChild(initials);
-                     }
-                   }}
-                 />
+                 <ProfileImage />
                  <div className="absolute bottom-0 w-full p-6 bg-gradient-to-t from-black/90 to-transparent">
                    <h3 className="text-xl font-bold text-white">Mark Christian Trajano</h3>
                    <p className="text-sm text-white/60">Philippines</p>
@@ -86,14 +78,11 @@ export default function HomePage() {
         </div>
 
         {/* EVIDENCE TRUST BAR */}
-        <div className="mt-20 border-y border-white/5 py-10 bg-gradient-to-r from-transparent via-[#06b6d4]/5 to-transparent">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-4 px-4">
+        <FadeIn direction="up" delay={0.4}>
+          <div className="mt-20 border-y border-white/5 py-10 bg-gradient-to-r from-transparent via-[#06b6d4]/5 to-transparent">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-4 px-4">
             <div className="flex flex-wrap justify-center md:justify-start items-center gap-x-8 gap-y-4">
-              {[
-                { label: "100% Defense Success", sub: "Verified Thesis Record" },
-                { label: "Turnitin-Verified", sub: "Elite Academic Quality" },
-                { label: "Industry-Standard", sub: "Scalable Tech Architectures" }
-              ].map((item, idx) => (
+              {TRUST_BADGES.map((item, idx) => (
                 <div key={idx} className="flex items-center gap-3">
                   <div className="w-1 h-8 bg-[#06b6d4] rounded-full opacity-50 hidden sm:block"></div>
                   <div>
@@ -111,40 +100,22 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
+        </FadeIn>
       </section>
 
       {/* CLIENT TESTIMONIALS */}
       <section className="container mx-auto px-6 py-20 max-w-7xl">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-black text-white mb-2 italic uppercase tracking-tighter">Client <span className="text-[#fbbf24]">Reviews</span></h2>
-          <p className="text-white/60 text-sm font-medium">What my clients say about working together.</p>
-        </div>
+        <FadeIn direction="up">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-black text-white mb-2 italic uppercase tracking-tighter">Client <span className="text-[#fbbf24]">Reviews</span></h2>
+            <p className="text-white/60 text-sm font-medium">What my clients say about working together.</p>
+          </div>
+        </FadeIn>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            {
-              name: "Maria Santos",
-              role: "BSIT Student, University of Santo Tomas",
-              quote: "Mark saved my thesis! The system worked perfectly and I defended with confidence. Zero issues during the oral defense.",
-              project: "Thesis System - Attendance Monitoring",
-              rating: 5
-            },
-            {
-              name: "James Rivera",
-              role: "Startup Founder, Manila",
-              quote: "Delivered a fully functional e-commerce platform in 2 weeks. Professional, responsive, and the code quality is exceptional.",
-              project: "Full-Stack Web Application",
-              rating: 5
-            },
-            {
-              name: "Ana Bautista",
-              role: "Masteral Student, Ateneo de Manila",
-              quote: "My research prototype exceeded expectations. Mark understood exactly what my adviser wanted and delivered on time.",
-              project: "Research Prototype - Data Analytics Dashboard",
-              rating: 5
-            },
-          ].map((testimonial, idx) => (
-            <div key={idx} className="card-styled p-8 border-white/5 hover:border-[#fbbf24]/20 transition-all flex flex-col gap-6">
+        <StaggerContainer staggerDelay={0.15}>
+          {TESTIMONIALS.map((testimonial, idx) => (
+            <StaggerItem key={idx} direction="up">
+              <div className="card-styled p-8 border-white/5 hover:border-[#fbbf24]/20 transition-all flex flex-col gap-6">
               <div className="flex gap-1">
                 {Array.from({ length: testimonial.rating }).map((_, i) => (
                   <Star key={i} size={14} className="text-[#fbbf24] fill-[#fbbf24]" />
@@ -164,8 +135,9 @@ export default function HomePage() {
                 <p className="text-[9px] text-[#06b6d4] font-black uppercase tracking-widest mt-3">{testimonial.project}</p>
               </div>
             </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
 
         <div className="mt-12 flex justify-center">
           <Link href="/about" className="group text-sm font-black text-white/40 hover:text-[#06b6d4] tracking-widest uppercase flex items-center gap-2 transition-colors">
@@ -191,103 +163,114 @@ export default function HomePage() {
 
       {/* STRATEGIC PLANS */}
       <section className="container mx-auto px-6 py-24 max-w-7xl">
-        <div className="text-center mb-16 space-y-4">
-          <h2 className="text-4xl md:text-6xl font-black text-white italic uppercase tracking-tighter">Strategic <span className="text-[#06b6d4]">Plans</span></h2>
-          <p className="text-white/60 font-medium max-w-xl mx-auto">Scalable solutions tailored for businesses and students. Choose your growth track.</p>
-        </div>
-        
+        <FadeIn direction="up">
+          <div className="text-center mb-16 space-y-4">
+            <h2 className="text-4xl md:text-6xl font-black text-white italic uppercase tracking-tighter">Strategic <span className="text-[#06b6d4]">Plans</span></h2>
+            <p className="text-white/60 font-medium max-w-xl mx-auto">Scalable solutions tailored for businesses and students. Choose your growth track.</p>
+          </div>
+        </FadeIn>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* BASIC */}
-          <div className="card-styled p-10 border-[#1E293B] bg-[#0B1121] relative flex flex-col group hover:border-[#06b6d4]/30 transition-all duration-500">
-             <div className="mb-10">
-               <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#06b6d4] bg-[#06b6d4]/5 px-3 py-1 rounded-full border border-[#06b6d4]/20">Basic</span>
-               <h3 className="text-3xl font-black text-white mt-4 uppercase tracking-tighter">Essential</h3>
-               <p className="text-sm text-white/40 mt-2 font-medium">Landing pages & UI wireframes</p>
-             </div>
+          <StaggerContainer staggerDelay={0.2}>
+            {/* BASIC */}
+            <StaggerItem direction="up">
+              <div className="card-styled p-10 border-[#1E293B] bg-[#0B1121] relative flex flex-col group hover:border-[#06b6d4]/30 transition-all duration-500">
+                 <div className="mb-10">
+                   <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#06b6d4] bg-[#06b6d4]/5 px-3 py-1 rounded-full border border-[#06b6d4]/20">Basic</span>
+                   <h3 className="text-3xl font-black text-white mt-4 uppercase tracking-tighter">Essential</h3>
+                   <p className="text-sm text-white/40 mt-2 font-medium">Landing pages & UI wireframes</p>
+                 </div>
 
-             <ul className="space-y-4 mb-12 flex-grow">
-                {["High-fidelity UI Mockups", "Responsive Landing Page", "SEO Foundation", "Contact Form Integration", TIMELINES.standard].map((item, i) => (
-                 <li key={i} className="flex items-center gap-3 text-xs font-bold text-white/70">
-                   <div className="w-1.5 h-1.5 rounded-full bg-[#06b6d4]"></div> {item}
-                 </li>
-               ))}
-             </ul>
+                 <ul className="space-y-4 mb-12 flex-grow">
+                    {["High-fidelity UI Mockups", "Responsive Landing Page", "SEO Foundation", "Contact Form Integration", TIMELINES.standard].map((item, i) => (
+                     <li key={i} className="flex items-center gap-3 text-xs font-bold text-white/70">
+                       <div className="w-1.5 h-1.5 rounded-full bg-[#06b6d4]"></div> {item}
+                     </li>
+                   ))}
+                 </ul>
 
-             <div className="mt-auto">
-                <p className="text-[10px] font-black text-white/30 uppercase tracking-widest mb-1">STARTING AT</p>
-                <p className="text-4xl font-black text-white mb-8">{PRICING.basic}+</p>
-                <Link href="/quote">
-                  <Button variant="outline" className="w-full uppercase font-black tracking-widest text-[10px] py-6 border-[#1E293B] group-hover:border-[#06b6d4] gap-2">
-                    Get Started <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
-             </div>
-          </div>
+                 <div className="mt-auto">
+                    <p className="text-[10px] font-black text-white/30 uppercase tracking-widest mb-1">STARTING AT</p>
+                    <p className="text-4xl font-black text-white mb-8">{PRICING.basic}+</p>
+                    <Link href="/quote">
+                      <Button variant="outline" className="w-full uppercase font-black tracking-widest text-[10px] py-6 border-[#1E293B] group-hover:border-[#06b6d4] gap-2">
+                        Get Started <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                      </Button>
+                    </Link>
+                 </div>
+              </div>
+            </StaggerItem>
 
-          {/* PREMIUM */}
-          <div className="card-styled p-10 border-[#fbbf24]/50 bg-[#fbbf24]/5 scale-[1.05] z-10 relative flex flex-col shadow-[0_0_50px_rgba(251,191,36,0.1)]">
-             <div className="absolute top-0 right-0 px-4 py-1.5 bg-[#fbbf24] text-[#0A0F1C] text-[9px] font-black uppercase tracking-widest rounded-bl-xl">
-                Most Chosen
-             </div>
-             
-             <div className="mb-10">
-               <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#fbbf24] bg-[#fbbf24]/10 px-3 py-1 rounded-full border border-[#fbbf24]/20">Premium</span>
-               <h3 className="text-3xl font-black text-white mt-4 uppercase tracking-tighter">Full Suite</h3>
-               <p className="text-sm text-white/40 mt-2 font-medium">Full-scale Web & Mobile Apps</p>
-             </div>
+            {/* PREMIUM */}
+            <StaggerItem direction="up">
+              <div className="card-styled p-10 border-[#fbbf24]/50 bg-[#fbbf24]/5 scale-[1.05] z-10 relative flex flex-col shadow-[0_0_50px_rgba(251,191,36,0.1)]">
+                 <div className="absolute top-0 right-0 px-4 py-1.5 bg-[#fbbf24] text-[#0A0F1C] text-[9px] font-black uppercase tracking-widest rounded-bl-xl">
+                    Most Chosen
+                 </div>
 
-             <ul className="space-y-4 mb-12 flex-grow">
-                {["Full Backend & Auth", "Real-time Databases", "Payment Integration", "Admin Dashboard", "Priority Support", TIMELINES.extended].map((item, i) => (
-                 <li key={i} className="flex items-center gap-3 text-xs font-bold text-white/90">
-                   <div className="w-1.5 h-1.5 rounded-full bg-[#fbbf24]"></div> {item}
-                 </li>
-               ))}
-             </ul>
+                 <div className="mb-10">
+                   <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#fbbf24] bg-[#fbbf24]/10 px-3 py-1 rounded-full border border-[#fbbf24]/20">Premium</span>
+                   <h3 className="text-3xl font-black text-white mt-4 uppercase tracking-tighter">Full Suite</h3>
+                   <p className="text-sm text-white/40 mt-2 font-medium">Full-scale Web & Mobile Apps</p>
+                 </div>
 
-             <div className="mt-auto">
-                <p className="text-[10px] font-black text-white/30 uppercase tracking-widest mb-1">STARTING AT</p>
-                <p className="text-4xl font-black text-white mb-8">{PRICING.premium}+</p>
-                <Link href="/quote">
-                  <Button className="w-full uppercase font-black tracking-widest text-[10px] py-6 bg-[#fbbf24] text-[#0A0F1C] border-none shadow-[0_0_30px_rgba(251,191,36,0.2)]">
-                    Scale Now ⚡
-                  </Button>
-                </Link>
-             </div>
-          </div>
+                 <ul className="space-y-4 mb-12 flex-grow">
+                    {["Full Backend & Auth", "Real-time Databases", "Payment Integration", "Admin Dashboard", "Priority Support", TIMELINES.extended].map((item, i) => (
+                     <li key={i} className="flex items-center gap-3 text-xs font-bold text-white/90">
+                       <div className="w-1.5 h-1.5 rounded-full bg-[#fbbf24]"></div> {item}
+                     </li>
+                   ))}
+                 </ul>
 
-          {/* ACADEMIC */}
-          <div className="card-styled p-10 border-[#1E293B] bg-[#0B1121] relative flex flex-col group hover:border-[#a855f7]/30 transition-all duration-500">
-             <div className="mb-10">
-               <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#a855f7] bg-[#a855f7]/5 px-3 py-1 rounded-full border border-[#a855f7]/20">Specialist</span>
-               <h3 className="text-3xl font-black text-white mt-4 uppercase tracking-tighter">Academic</h3>
-               <p className="text-sm text-white/40 mt-2 font-medium italic">Undergrad • Masteral • Thesis</p>
-             </div>
+                 <div className="mt-auto">
+                    <p className="text-[10px] font-black text-white/30 uppercase tracking-widest mb-1">STARTING AT</p>
+                    <p className="text-4xl font-black text-white mb-8">{PRICING.premium}+</p>
+                    <Link href="/quote">
+                      <Button className="w-full uppercase font-black tracking-widest text-[10px] py-6 bg-[#fbbf24] text-[#0A0F1C] border-none shadow-[0_0_30px_rgba(251,191,36,0.2)]">
+                        Scale Now ⚡
+                      </Button>
+                    </Link>
+                 </div>
+              </div>
+            </StaggerItem>
 
-             <ul className="space-y-4 mb-12 flex-grow">
-                {["Research-Ready Prototype", "Chapter 1-5 Documentation", "Turnitin Similarity Report", "SPSS Data Analysis", TIMELINES.rush].map((item, i) => (
-                 <li key={i} className="flex items-center gap-3 text-xs font-bold text-white/70">
-                   <div className="w-1.5 h-1.5 rounded-full bg-[#a855f7]"></div> {item}
-                 </li>
-               ))}
-             </ul>
+            {/* ACADEMIC */}
+            <StaggerItem direction="up">
+              <div className="card-styled p-10 border-[#1E293B] bg-[#0B1121] relative flex flex-col group hover:border-[#a855f7]/30 transition-all duration-500">
+                 <div className="mb-10">
+                   <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#a855f7] bg-[#a855f7]/5 px-3 py-1 rounded-full border border-[#a855f7]/20">Specialist</span>
+                   <h3 className="text-3xl font-black text-white mt-4 uppercase tracking-tighter">Academic</h3>
+                   <p className="text-sm text-white/40 mt-2 font-medium italic">Undergrad • Masteral • Thesis</p>
+                 </div>
 
-             <div className="mt-auto">
-                <p className="text-[10px] font-black text-white/30 uppercase tracking-widest mb-1">STARTING AT</p>
-                <p className="text-4xl font-black text-white mb-8">{PRICING.academic}+</p>
-                <Link href="/thesis">
-                  <Button variant="outline" className="w-full uppercase font-black tracking-widest text-[10px] py-6 border-[#1E293B] group-hover:border-[#a855f7] gap-2">
-                    Begin Research <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
-             </div>
-          </div>
+                 <ul className="space-y-4 mb-12 flex-grow">
+                    {["Research-Ready Prototype", "Chapter 1-5 Documentation", "Turnitin Similarity Report", "SPSS Data Analysis", TIMELINES.rush].map((item, i) => (
+                     <li key={i} className="flex items-center gap-3 text-xs font-bold text-white/70">
+                       <div className="w-1.5 h-1.5 rounded-full bg-[#a855f7]"></div> {item}
+                     </li>
+                   ))}
+                 </ul>
+
+                 <div className="mt-auto">
+                    <p className="text-[10px] font-black text-white/30 uppercase tracking-widest mb-1">STARTING AT</p>
+                    <p className="text-4xl font-black text-white mb-8">{PRICING.academic}+</p>
+                    <Link href="/thesis">
+                      <Button variant="outline" className="w-full uppercase font-black tracking-widest text-[10px] py-6 border-[#1E293B] group-hover:border-[#a855f7] gap-2">
+                        Begin Research <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                      </Button>
+                    </Link>
+                 </div>
+              </div>
+            </StaggerItem>
+          </StaggerContainer>
         </div>
       </section>
 
       {/* MODERN STACK */}
       <section className="container mx-auto px-6 py-20 max-w-7xl">
-        <div className="card-styled p-8 md:p-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
-          <div className="lg:col-span-4">
+        <FadeIn direction="up">
+          <div className="card-styled p-8 md:p-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div className="lg:col-span-4">
             <h2 className="text-3xl font-black text-white mb-4">Modern Stack</h2>
             <p className="text-white/60 text-sm leading-relaxed max-w-sm">
               Built with the same industry standards used by top tech companies globally.
@@ -295,17 +278,10 @@ export default function HomePage() {
           </div>
           
           <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-            {[
-              { name: "React JS", type: "FRONTEND", color: "bg-[#06b6d4]" },
-              { name: "Next.js", type: "FULL-STACK", color: "bg-[#06b6d4]" },
-              { name: "TypeScript", type: "TYPE-SAFE", color: "bg-[#06b6d4]" },
-              { name: "Tailwind CSS", type: "UI DESIGN", color: "bg-[#06b6d4]" },
-              { name: "React Native", type: "MOBILE APP", color: "bg-[#06b6d4]" },
-              { name: "Convex / NextAuth", type: "BACKEND", color: "bg-[#06b6d4]" }
-            ].map((tech, idx) => (
+            {TECH_STACK.map((tech, idx) => (
               <div key={idx} className="flex items-center justify-between p-5 rounded-xl border border-[#1E293B] bg-[#0B1121] hover:border-[#334155] transition-colors">
                 <div className="flex items-center gap-3">
-                  <span className={`w-2 h-2 rounded-full ${tech.color}`}></span>
+                  <span className="w-2 h-2 rounded-full bg-[#06b6d4]"></span>
                   <span className="font-bold text-white text-sm">{tech.name}</span>
                 </div>
                 <span className="text-[9px] font-black tracking-widest uppercase text-white/40">{tech.type}</span>
@@ -313,12 +289,14 @@ export default function HomePage() {
             ))}
           </div>
         </div>
+        </FadeIn>
 
       </section>
 
       {/* CONTACT CTA */}
       <section className="container mx-auto px-6 py-12 max-w-7xl pb-32">
-        <div className="card-styled p-8 md:p-16 flex flex-col lg:flex-row justify-between items-center gap-12 relative overflow-hidden">
+        <FadeIn direction="up" delay={0.2}>
+          <div className="card-styled p-8 md:p-16 flex flex-col lg:flex-row justify-between items-center gap-12 relative overflow-hidden">
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#06b6d4]/10 rounded-full blur-[100px] pointer-events-none"></div>
           
           <div className="flex-1 space-y-8 relative z-10 w-full">
@@ -334,17 +312,17 @@ export default function HomePage() {
                 </div>
                 <div>
                   <p className="text-[10px] font-bold text-white/50 uppercase tracking-widest">WHATSAPP / SMS</p>
-                  <p className="font-bold text-white">09922972119</p>
+                  <p className="font-bold text-white">{CONTACT.whatsapp}</p>
                 </div>
               </div>
-              
+
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 rounded bg-[#06b6d4]/10 flex items-center justify-center">
                   <Facebook size={18} className="text-[#06b6d4]" />
                 </div>
                 <div>
                   <p className="text-[10px] font-bold text-white/50 uppercase tracking-widest">FACEBOOK</p>
-                  <p className="font-bold text-white">facebook.com/superrmarky</p>
+                  <p className="font-bold text-white">{CONTACT.facebook}</p>
                 </div>
               </div>
 
@@ -354,7 +332,7 @@ export default function HomePage() {
                 </div>
                 <div>
                   <p className="text-[10px] font-bold text-white/50 uppercase tracking-widest">EMAIL</p>
-                  <p className="font-bold text-white">trajano.mark0826@gmail.com</p>
+                  <p className="font-bold text-white">{CONTACT.email}</p>
                 </div>
               </div>
             </div>
@@ -386,7 +364,7 @@ export default function HomePage() {
               <div className="w-24 h-24 border border-[#06b6d4]/30 rounded-lg flex items-center justify-center bg-white mb-2 overflow-hidden p-1">
                 {/* Dynamic QR code - generates a WhatsApp chat link QR */}
                 <img
-                  src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://wa.me/639922972119?text=Hi%20Mark,%20I%20found%20your%20portfolio%20and%20I'd%20like%20to%20discuss%20a%20project`}
+                  src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(WHATSAPP_QR_DATA)}`}
                   alt="Scan to message on WhatsApp"
                   className="w-full h-full object-contain"
                 />
@@ -397,10 +375,18 @@ export default function HomePage() {
             <div className="mt-8 text-center space-y-4">
               <p className="text-[9px] font-black text-white/30 uppercase tracking-[0.3em]">Bank & Digital Pay Verified</p>
               <div className="flex items-center gap-6 grayscale opacity-40 hover:grayscale-0 hover:opacity-80 transition-all duration-500">
-                <span className="text-[11px] font-black text-white bg-white/5 px-2 py-0.5 rounded border border-white/10 italic">GCash</span>
-                <span className="text-[11px] font-black text-white bg-white/5 px-2 py-0.5 rounded border border-white/10 italic">Maya</span>
-                <span className="text-[11px] font-black text-white bg-white/5 px-2 py-0.5 rounded border border-white/10 italic">Bank</span>
-                <span className="text-[11px] font-black text-[#003087] bg-white px-2 py-0.5 rounded border border-[#003087]/20 italic">PayPal</span>
+                {PAYMENT_METHODS.map((method) => (
+                  <span
+                    key={method}
+                    className={`text-[11px] font-black px-2 py-0.5 rounded border italic ${
+                      method === "PayPal"
+                        ? "text-[#003087] bg-white border-[#003087]/20"
+                        : "text-white bg-white/5 border-white/10"
+                    }`}
+                  >
+                    {method}
+                  </span>
+                ))}
               </div>
             </div>
             
@@ -409,6 +395,7 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
+        </FadeIn>
       </section>
 
     </div>
