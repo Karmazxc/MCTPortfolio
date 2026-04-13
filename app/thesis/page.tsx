@@ -107,7 +107,7 @@ export default function ThesisPage() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#fbbf24]/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
           <div className="relative z-10">
             <h3 className="text-2xl font-black text-white mb-2 italic">Ready to finish your degree?</h3>
-            <p className="text-white/60 text-sm max-w-md">Get full Chapter 1-5 documentation starting at <span className="text-[#fbbf24] font-black">{PRICING.academic}+</span>. Limited slots per semester.</p>
+            <p className="text-white/60 text-sm max-w-md">Get full Chapter 1-5 documentation starting at <span className="text-[#fbbf24] font-black">{PRICING.thesis}+</span>. Limited slots per semester.</p>
           </div>
           <Link href="/quote" className="relative z-10">
             <Button variant="primary" className="uppercase tracking-widest text-xs px-10 shadow-[0_0_20px_rgba(251,191,36,0.15)]">Request Priority Quote</Button>

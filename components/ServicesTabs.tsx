@@ -47,6 +47,31 @@ export function ServicesTabs() {
       tech: ["React 19", "Next.js", "TypeScript", "Tailwind CSS", "Convex"]
     },
     {
+      id: "growth",
+      title: "Growth Web Apps",
+      subtitle: "Dynamic Apps & Platforms",
+      icon: <BarChart3 size={24} />,
+      desc: "Full-featured web applications with authentication, databases, and admin panels. Perfect for businesses scaling beyond landing pages.",
+      timeline: TIMELINES.growth,
+      pricing: `${PRICING.growth}+`,
+      included: [
+        "User authentication & accounts",
+        "Real-time database integration",
+        "Admin dashboard & analytics",
+        "API integrations (payments, email)",
+        "CMS for content management",
+        "3-5 week delivery"
+      ],
+      extras: [
+        "Free architecture consultation",
+        "3 rounds of revisions",
+        "Deployment & domain setup",
+        "1 month free support",
+        "Performance optimization"
+      ],
+      tech: ["Next.js", "TypeScript", "Convex", "Tailwind CSS", "Stripe"]
+    },
+    {
       id: "mobile",
       title: "Mobile App Development",
       subtitle: "Android & iOS Applications",
@@ -77,7 +102,7 @@ export function ServicesTabs() {
       subtitle: "Figma Designs & Prototypes",
       icon: <Palette size={24} />,
       desc: "Pixel-perfect, user-centered interface designs and interactive prototypes to visualize your product before development.",
-      pricing: "₱5,000+",
+      pricing: `${PRICING.uiux}+`,
       timeline: TIMELINES.design,
       included: [
         "User research & wireframes",
@@ -101,7 +126,7 @@ export function ServicesTabs() {
   return (
     <div className="w-full">
       {/* TABS HEADER */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
         {services.map((s, idx) => (
           <button
             key={s.id}

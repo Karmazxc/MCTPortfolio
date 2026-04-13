@@ -242,9 +242,10 @@ export default function QuotePage() {
                   <label className="text-[10px] uppercase font-black tracking-widest text-white/50">BUDGET RANGE</label>
                   <select required value={formData.budget} onChange={e => setFormData({...formData, budget: e.target.value})} className="w-full bg-[#0A0F1C] border border-[#1E293B] rounded-lg px-4 py-3 text-sm text-white/70 focus:outline-none focus:border-[#06b6d4] transition-colors appearance-none">
                     <option value="" disabled>Select range...</option>
-                    <option value="1">{PRICING.academic} - {PRICING.basic}</option>
-                    <option value="2">{PRICING.basic} - {PRICING.premium}</option>
-                    <option value="3">{PRICING.premium}+</option>
+                    <option value="1">{PRICING.thesis} - {PRICING.basic}</option>
+                    <option value="2">{PRICING.basic} - {PRICING.growth}</option>
+                    <option value="3">{PRICING.growth} - {PRICING.premium}</option>
+                    <option value="4">{PRICING.premium}+</option>
                   </select>
                 </div>
               </div>

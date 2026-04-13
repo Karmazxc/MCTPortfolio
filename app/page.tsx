@@ -168,59 +168,86 @@ export default function HomePage() {
           </div>
         </FadeIn>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* BASIC */}
-          <FadeIn direction="up" delay={0.1} className="card-styled p-10 border-[#1E293B] bg-[#0B1121] relative flex flex-col group hover:border-[#06b6d4]/30 transition-all duration-500">
-             <div className="mb-10">
-               <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#06b6d4] bg-[#06b6d4]/5 px-3 py-1 rounded-full border border-[#06b6d4]/20">Basic</span>
-               <h3 className="text-3xl font-black text-white mt-4 uppercase tracking-tighter">Essential</h3>
-               <p className="text-sm text-white/40 mt-2 font-medium">Landing pages & UI wireframes</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+          {/* STARTER */}
+          <FadeIn direction="up" delay={0.1} className="card-styled p-8 border-[#1E293B] bg-[#0B1121] relative flex flex-col group hover:border-[#06b6d4]/30 transition-all duration-500">
+             <div className="mb-8">
+               <span className="text-[9px] font-black uppercase tracking-[0.3em] text-[#06b6d4] bg-[#06b6d4]/5 px-3 py-1 rounded-full border border-[#06b6d4]/20">Starter</span>
+               <h3 className="text-2xl font-black text-white mt-3 uppercase tracking-tighter">Essential</h3>
+               <p className="text-xs text-white/40 mt-2 font-medium">Landing pages & portfolios</p>
              </div>
 
-             <ul className="space-y-4 mb-12 flex-grow">
-                {["High-fidelity UI Mockups", "Responsive Landing Page", "SEO Foundation", "Contact Form Integration", TIMELINES.standard].map((item, i) => (
-                 <li key={i} className="flex items-center gap-3 text-xs font-bold text-white/70">
-                   <div className="w-1.5 h-1.5 rounded-full bg-[#06b6d4]"></div> {item}
+             <ul className="space-y-3 mb-10 flex-grow text-xs">
+                {["Responsive Landing Page", "SEO Foundation", "Contact Form", "Mobile-First Design", TIMELINES.basic].map((item, i) => (
+                 <li key={i} className="flex items-center gap-2 font-bold text-white/70">
+                   <div className="w-1.5 h-1.5 rounded-full bg-[#06b6d4] flex-shrink-0"></div> {item}
                  </li>
                ))}
              </ul>
 
              <div className="mt-auto">
-                <p className="text-[10px] font-black text-white/30 uppercase tracking-widest mb-1">STARTING AT</p>
-                <p className="text-4xl font-black text-white mb-8">{PRICING.basic}+</p>
+                <p className="text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">STARTING AT</p>
+                <p className="text-3xl font-black text-white mb-6">{PRICING.basic}+</p>
                 <Link href="/quote">
-                  <Button variant="outline" className="w-full uppercase font-black tracking-widest text-[10px] py-6 border-[#1E293B] group-hover:border-[#06b6d4] gap-2">
-                    Get Started <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                  <Button variant="outline" className="w-full uppercase font-black tracking-widest text-[9px] py-4 border-[#1E293B] group-hover:border-[#06b6d4] gap-2">
+                    Get Started <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
+             </div>
+          </FadeIn>
+
+          {/* GROWTH */}
+          <FadeIn direction="up" delay={0.2} className="card-styled p-8 border-[#1E293B] bg-[#0B1121] relative flex flex-col group hover:border-[#a855f7]/30 transition-all duration-500">
+             <div className="mb-8">
+               <span className="text-[9px] font-black uppercase tracking-[0.3em] text-[#a855f7] bg-[#a855f7]/5 px-3 py-1 rounded-full border border-[#a855f7]/20">Growth</span>
+               <h3 className="text-2xl font-black text-white mt-3 uppercase tracking-tighter">Web Apps</h3>
+               <p className="text-xs text-white/40 mt-2 font-medium">Auth, database & admin panels</p>
+             </div>
+
+             <ul className="space-y-3 mb-10 flex-grow text-xs">
+                {["User Auth & Accounts", "Real-time Database", "Admin Dashboard", "API Integrations", TIMELINES.growth].map((item, i) => (
+                 <li key={i} className="flex items-center gap-2 font-bold text-white/70">
+                   <div className="w-1.5 h-1.5 rounded-full bg-[#a855f7] flex-shrink-0"></div> {item}
+                 </li>
+               ))}
+             </ul>
+
+             <div className="mt-auto">
+                <p className="text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">STARTING AT</p>
+                <p className="text-3xl font-black text-white mb-6">{PRICING.growth}+</p>
+                <Link href="/quote">
+                  <Button variant="outline" className="w-full uppercase font-black tracking-widest text-[9px] py-4 border-[#1E293B] group-hover:border-[#a855f7] gap-2">
+                    Scale Up <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
              </div>
           </FadeIn>
 
           {/* PREMIUM */}
-          <FadeIn direction="up" delay={0.2} className="card-styled p-10 border-[#fbbf24]/50 bg-[#fbbf24]/5 scale-[1.05] z-10 relative flex flex-col shadow-[0_0_50px_rgba(251,191,36,0.1)]">
-             <div className="absolute top-0 right-0 px-4 py-1.5 bg-[#fbbf24] text-[#0A0F1C] text-[9px] font-black uppercase tracking-widest rounded-bl-xl">
+          <FadeIn direction="up" delay={0.3} className="card-styled p-8 border-[#fbbf24]/50 bg-[#fbbf24]/5 scale-[1.02] xl:scale-[1.05] z-10 relative flex flex-col shadow-[0_0_50px_rgba(251,191,36,0.1)]">
+             <div className="absolute top-0 right-0 px-3 py-1 bg-[#fbbf24] text-[#0A0F1C] text-[8px] font-black uppercase tracking-widest rounded-bl-xl">
                 Most Chosen
              </div>
 
-             <div className="mb-10">
-               <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#fbbf24] bg-[#fbbf24]/10 px-3 py-1 rounded-full border border-[#fbbf24]/20">Premium</span>
-               <h3 className="text-3xl font-black text-white mt-4 uppercase tracking-tighter">Full Suite</h3>
-               <p className="text-sm text-white/40 mt-2 font-medium">Full-scale Web & Mobile Apps</p>
+             <div className="mb-8">
+               <span className="text-[9px] font-black uppercase tracking-[0.3em] text-[#fbbf24] bg-[#fbbf24]/10 px-3 py-1 rounded-full border border-[#fbbf24]/20">Premium</span>
+               <h3 className="text-2xl font-black text-white mt-3 uppercase tracking-tighter">Full Suite</h3>
+               <p className="text-xs text-white/40 mt-2 font-medium">Full-scale Web & Mobile Apps</p>
              </div>
 
-             <ul className="space-y-4 mb-12 flex-grow">
-                {["Full Backend & Auth", "Real-time Databases", "Payment Integration", "Admin Dashboard", "Priority Support", TIMELINES.extended].map((item, i) => (
-                 <li key={i} className="flex items-center gap-3 text-xs font-bold text-white/90">
-                   <div className="w-1.5 h-1.5 rounded-full bg-[#fbbf24]"></div> {item}
+             <ul className="space-y-3 mb-10 flex-grow text-xs">
+                {["Full Backend & Auth", "Payment Integration", "Mobile App (iOS/Android)", "Priority Support", TIMELINES.extended].map((item, i) => (
+                 <li key={i} className="flex items-center gap-2 font-bold text-white/90">
+                   <div className="w-1.5 h-1.5 rounded-full bg-[#fbbf24] flex-shrink-0"></div> {item}
                  </li>
                ))}
              </ul>
 
              <div className="mt-auto">
-                <p className="text-[10px] font-black text-white/30 uppercase tracking-widest mb-1">STARTING AT</p>
-                <p className="text-4xl font-black text-white mb-8">{PRICING.premium}+</p>
+                <p className="text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">STARTING AT</p>
+                <p className="text-3xl font-black text-white mb-6">{PRICING.premium}+</p>
                 <Link href="/quote">
-                  <Button className="w-full uppercase font-black tracking-widest text-[10px] py-6 bg-[#fbbf24] text-[#0A0F1C] border-none shadow-[0_0_30px_rgba(251,191,36,0.2)]">
+                  <Button className="w-full uppercase font-black tracking-widest text-[9px] py-4 bg-[#fbbf24] text-[#0A0F1C] border-none shadow-[0_0_30px_rgba(251,191,36,0.2)]">
                     Scale Now ⚡
                   </Button>
                 </Link>
@@ -228,27 +255,27 @@ export default function HomePage() {
           </FadeIn>
 
           {/* ACADEMIC */}
-          <FadeIn direction="up" delay={0.3} className="card-styled p-10 border-[#1E293B] bg-[#0B1121] relative flex flex-col group hover:border-[#a855f7]/30 transition-all duration-500">
-             <div className="mb-10">
-               <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#a855f7] bg-[#a855f7]/5 px-3 py-1 rounded-full border border-[#a855f7]/20">Specialist</span>
-               <h3 className="text-3xl font-black text-white mt-4 uppercase tracking-tighter">Academic</h3>
-               <p className="text-sm text-white/40 mt-2 font-medium italic">Undergrad • Masteral • Thesis</p>
+          <FadeIn direction="up" delay={0.4} className="card-styled p-8 border-[#1E293B] bg-[#0B1121] relative flex flex-col group hover:border-[#ec4899]/30 transition-all duration-500">
+             <div className="mb-8">
+               <span className="text-[9px] font-black uppercase tracking-[0.3em] text-[#ec4899] bg-[#ec4899]/5 px-3 py-1 rounded-full border border-[#ec4899]/20">Academic</span>
+               <h3 className="text-2xl font-black text-white mt-3 uppercase tracking-tighter">Thesis</h3>
+               <p className="text-xs text-white/40 mt-2 font-medium italic">Undergrad • Masteral • PhD</p>
              </div>
 
-             <ul className="space-y-4 mb-12 flex-grow">
-                {["Research-Ready Prototype", "Chapter 1-5 Documentation", "Turnitin Similarity Report", "SPSS Data Analysis", TIMELINES.rush].map((item, i) => (
-                 <li key={i} className="flex items-center gap-3 text-xs font-bold text-white/70">
-                   <div className="w-1.5 h-1.5 rounded-full bg-[#a855f7]"></div> {item}
+             <ul className="space-y-3 mb-10 flex-grow text-xs">
+                {["Research-Ready Prototype", "Chapter 1-5 Documentation", "Turnitin Report", "SPSS Data Analysis", TIMELINES.rush].map((item, i) => (
+                 <li key={i} className="flex items-center gap-2 font-bold text-white/70">
+                   <div className="w-1.5 h-1.5 rounded-full bg-[#ec4899] flex-shrink-0"></div> {item}
                  </li>
                ))}
              </ul>
 
              <div className="mt-auto">
-                <p className="text-[10px] font-black text-white/30 uppercase tracking-widest mb-1">STARTING AT</p>
-                <p className="text-4xl font-black text-white mb-8">{PRICING.academic}+</p>
+                <p className="text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">STARTING AT</p>
+                <p className="text-3xl font-black text-white mb-6">{PRICING.thesis}+</p>
                 <Link href="/thesis">
-                  <Button variant="outline" className="w-full uppercase font-black tracking-widest text-[10px] py-6 border-[#1E293B] group-hover:border-[#a855f7] gap-2">
-                    Begin Research <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                  <Button variant="outline" className="w-full uppercase font-black tracking-widest text-[9px] py-4 border-[#1E293B] group-hover:border-[#ec4899] gap-2">
+                    Begin Research <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
              </div>
