@@ -24,8 +24,6 @@ import {
   DollarSign
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useQuery } from "convex/react";
-import { api } from "@/backend/convex/_generated/api";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { STATS, PRICING, CONTACT } from "@/lib/constants";
@@ -103,11 +101,8 @@ function timeAgo(timestamp: number): string {
 }
 
 export default function AboutPage() {
-  // useQuery returns undefined on error, fallback to empty array
-  const proofs = useQuery(api.proofs.proofs.getProofs, {}) ?? [];
-  
-  // Show demo proofs if no real proofs exist or if there's an error
-  const displayProofs = proofs.length > 0 ? proofs : DEMO_PROOFS;
+  // Use demo proofs only - no Convex dependency to avoid connection errors
+  const displayProofs = DEMO_PROOFS;
   const [carouselIndex, setCarouselIndex] = React.useState(0);
 
   // Calculate stats from proofs
