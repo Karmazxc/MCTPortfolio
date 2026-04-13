@@ -281,13 +281,21 @@ export default function AboutPage() {
               className="card-styled overflow-hidden group border-white/5 hover:border-emerald-500/30 transition-all duration-500 bg-[#0B1121]/90 hover:-translate-y-2"
             >
               {/* Image Section */}
-              <div className="aspect-[4/3] relative overflow-hidden bg-white/5">
-                <img 
-                  src={proof.url} 
-                  alt={proof.title} 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 opacity-70 group-hover:opacity-100" 
+              <div className="aspect-[4/3] relative overflow-hidden bg-[#0B1121]">
+                <img
+                  src={proof.url}
+                  alt={proof.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'w-full h-full flex items-center justify-center bg-gradient-to-br from-[#06b6d4]/20 to-[#a855f7]/20';
+                    placeholder.innerHTML = '<span class="text-4xl opacity-30">🧾</span>';
+                    target.parentElement?.appendChild(placeholder);
+                  }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0B1121] via-transparent to-transparent opacity-80"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B1121] via-[#0B1121]/20 to-transparent"></div>
                 
                 {/* Status Badge */}
                 <div className="absolute top-4 left-4">
