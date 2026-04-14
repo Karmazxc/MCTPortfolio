@@ -2,38 +2,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { useQuery, useMutation, useConvex } from "convex/react";
+import { useQuery, useMutation } from "convex/react";
 import { api } from "@/backend/convex/_generated/api";
 import { Button } from "@/components/ui/Button";
 import { Inbox, CheckCircle, Database, Search, Filter, ExternalLink, Mail, Trash2, Plus, Loader2, Award, Camera, LogOut, ShieldAlert, FileCheck, Pencil, X, ChevronLeft, ChevronRight, Users, TrendingUp, DollarSign, CheckCircle2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function AdminDashboard() {
-  const convex = useConvex();
-  const router = useRouter();
-
-  // If Convex isn't connected, show a helpful message
-  if (!convex || !convex.client) {
-    return (
-      <div className="min-h-screen bg-[#0A0A0B] text-white flex items-center justify-center px-4">
-        <div className="text-center max-w-md">
-          <div className="text-6xl mb-4">⚠️</div>
-          <h1 className="text-2xl font-bold mb-2">Database Not Connected</h1>
-          <p className="text-gray-400 mb-6">
-            Convex is not configured. Please check your environment variables.
-          </p>
-          <a href="/" className="px-6 py-2 bg-white text-black rounded-lg font-medium hover:bg-gray-200 transition-colors inline-block">
-            Go Home
-          </a>
-        </div>
-      </div>
-    );
-  }
-
-  return <AdminDashboardInner />;
-}
-
-function AdminDashboardInner() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<"projects" | "inquiries" | "paymentProofs" | "about" | "logs">("inquiries");
   const [filterType, setFilterType] = useState<string>("all");
@@ -61,7 +36,7 @@ function AdminDashboardInner() {
   const [paymentProofNotes, setPaymentProofNotes] = useState("");
   const [viewingProofsForQuote, setViewingProofsForQuote] = useState<string | null>(null);
 
-  // Convex hooks
+  // Convex hooks - all queries/mutations with || [] fallbacks
   const updateQuoteStatus = useMutation(api.quotations.quotations.updateStatus);
   const deleteQuote = useMutation(api.quotations.quotations.deleteQuotation);
   const createProject = useMutation(api.projects.projects.addProject);
@@ -75,10 +50,10 @@ function AdminDashboardInner() {
   const deletePaymentProof = useMutation(api.payments.payments.deletePaymentProof);
   const addLog = useMutation(api.logs.logs.addLog);
 
-  const proofs = useQuery(api.proofs.proofs.getProofs, {}) ?? [];
-  const allPaymentProofs = useQuery(api.payments.payments.getAllPaymentProofs, {}) ?? [];
-  const logs = useQuery(api.logs.logs.getLogs, {}) ?? [];
-  const dbProjects = useQuery(api.projects.projects.getProjects) ?? [];
+  const proofs = useQuery(api.proofs.proofs.getProofs, {}) || [];
+  const allPaymentProofs = useQuery(api.payments.payments.getAllPaymentProofs, {}) || [];
+  const logs = useQuery(api.logs.logs.getLogs, {}) || [];
+  const dbProjects = useQuery(api.projects.projects.getProjects) || [];
   
   /*
 # Portfolio Refinement & Phase 5: Payment Proofs
