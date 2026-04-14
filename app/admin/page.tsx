@@ -2,20 +2,43 @@
 "use client";
 
 import React, { useState } from "react";
-import { useQuery, useMutation } from "convex/react";
+import { useQuery, useMutation, useConvex } from "convex/react";
 import { api } from "@/backend/convex/_generated/api";
 import { Button } from "@/components/ui/Button";
 import { Inbox, CheckCircle, Database, Search, Filter, ExternalLink, Mail, Trash2, Plus, Loader2, Award, Camera, LogOut, ShieldAlert, FileCheck, Pencil, X, ChevronLeft, ChevronRight, Users, TrendingUp, DollarSign, CheckCircle2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function AdminDashboard() {
+  const convex = useConvex();
+  const router = useRouter();
+
+  // If Convex isn't connected, show a helpful message
+  if (!convex || !convex.client) {
+    return (
+      <div className="min-h-screen bg-[#0A0A0B] text-white flex items-center justify-center px-4">
+        <div className="text-center max-w-md">
+          <div className="text-6xl mb-4">⚠️</div>
+          <h1 className="text-2xl font-bold mb-2">Database Not Connected</h1>
+          <p className="text-gray-400 mb-6">
+            Convex is not configured. Please check your environment variables.
+          </p>
+          <a href="/" className="px-6 py-2 bg-white text-black rounded-lg font-medium hover:bg-gray-200 transition-colors inline-block">
+            Go Home
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+  return <AdminDashboardInner />;
+}
+
+function AdminDashboardInner() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<"projects" | "inquiries" | "paymentProofs" | "about" | "logs">("inquiries");
   const [filterType, setFilterType] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
-  const [proofFilter, setProofFilter] = useState<string>("all"); // Filter proofs by status
-  
-  // Form States for New Project
+  const [proofFilter, setProofFilter] = useState<string>("all");
   const [newProject, setNewProject] = useState({
     title: "",
     description: "",
@@ -27,24 +50,18 @@ export default function AdminDashboard() {
   const [uploadMode, setUploadMode] = useState<"url" | "file">("url");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isDeploying, setIsDeploying] = useState(false);
-
-  // Edit Project State
   const [editingProject, setEditingProject] = useState<any>(null);
-
-  // About Proof States
   const [newProof, setNewProof] = useState({ title: "", category: "technical" });
   const [isUploadingProof, setIsUploadingProof] = useState(false);
   const [proofFile, setProofFile] = useState<File | null>(null);
-
-  // Payment Proof States (per-inquiry)
   const [selectedQuoteForProof, setSelectedQuoteForProof] = useState<string | null>(null);
   const [paymentProofFile, setPaymentProofFile] = useState<File | null>(null);
   const [isUploadingPaymentProof, setIsUploadingPaymentProof] = useState(false);
   const [paymentProofAmount, setPaymentProofAmount] = useState<string>("");
   const [paymentProofNotes, setPaymentProofNotes] = useState("");
   const [viewingProofsForQuote, setViewingProofsForQuote] = useState<string | null>(null);
-  
-  // Convex Mutations
+
+  // Convex hooks
   const updateQuoteStatus = useMutation(api.quotations.quotations.updateStatus);
   const deleteQuote = useMutation(api.quotations.quotations.deleteQuotation);
   const createProject = useMutation(api.projects.projects.addProject);
@@ -53,18 +70,15 @@ export default function AdminDashboard() {
   const generateUploadUrl = useMutation(api.proofs.proofs.generateUploadUrl);
   const saveProof = useMutation(api.proofs.proofs.saveProof);
   const deleteProof = useMutation(api.proofs.proofs.deleteProof);
-  // Payment proof mutations
   const savePaymentProof = useMutation(api.payments.payments.savePaymentProof);
   const updatePaymentProofStatus = useMutation(api.payments.payments.updateProofStatus);
   const deletePaymentProof = useMutation(api.payments.payments.deletePaymentProof);
-  // Fallback to saveProof hook reference if logs aren't generated yet to prevent useMutation(undefined) crash
-  const addLog = useMutation(api.logs ? api.logs.logs.addLog : api.proofs.proofs.saveProof);
+  const addLog = useMutation(api.logs.logs.addLog);
 
-  // Convex Queries
-  const proofs = useQuery(api.proofs.proofs.getProofs, {}) || [];
-  const allPaymentProofs = useQuery(api.payments.payments.getAllPaymentProofs, {}) || [];
-  const logs = useQuery(api.logs ? api.logs.logs.getLogs : api.proofs.proofs.getProofs, {}) || [];
-  const dbProjects = useQuery(api.projects.projects.getProjects) || [];
+  const proofs = useQuery(api.proofs.proofs.getProofs, {}) ?? [];
+  const allPaymentProofs = useQuery(api.payments.payments.getAllPaymentProofs, {}) ?? [];
+  const logs = useQuery(api.logs.logs.getLogs, {}) ?? [];
+  const dbProjects = useQuery(api.projects.projects.getProjects) ?? [];
   
   /*
 # Portfolio Refinement & Phase 5: Payment Proofs
@@ -95,7 +109,7 @@ We are extending the Admin Dashboard with a secure "Payment Proof" uploader. Thi
 - [ ] Check image rendering and modal behavior for uploaded receipts.
 */
   // Real Convex Data + Offline Simulation for Demo
-  const dbInquiries = useQuery(api.quotations.getQuotations) || [];
+  const dbInquiries = useQuery(api.quotations.quotations.getQuotations) ?? [];
   const [offlineInquiries, setOfflineInquiries] = useState<any[]>([]);
 
   React.useEffect(() => {
