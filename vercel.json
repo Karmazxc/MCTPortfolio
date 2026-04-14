@@ -4,13 +4,13 @@
   "framework": "nextjs",
   "regions": ["iad1"],
   "env": {
-    "NEXT_PUBLIC_CONVEX_URL": "https://good-giraffe-568.convex.cloud",
-    "NEXT_PUBLIC_CONVEX_SITE_URL": "https://good-giraffe-568.convex.site",
-    "CONVEX_DEPLOYMENT": "dev:good-giraffe-568"
+    "NEXT_PUBLIC_CONVEX_URL": "https://judicious-caterpillar-897.convex.cloud",
+    "NEXT_PUBLIC_CONVEX_SITE_URL": "https://judicious-caterpillar-897.convex.site",
+    "CONVEX_DEPLOYMENT": "prod:judicious-caterpillar-897"
   },
   "build": {
     "env": {
-      "NEXT_PUBLIC_CONVEX_URL": "https://good-giraffe-568.convex.cloud"
+      "NEXT_PUBLIC_CONVEX_URL": "https://judicious-caterpillar-897.convex.cloud"
     }
   }
 }
