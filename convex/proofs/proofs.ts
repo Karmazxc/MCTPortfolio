@@ -47,3 +47,24 @@ export const deleteProof = mutation({
     await ctx.db.delete(args.id);
   },
 });
+
+export const deleteAllTransactionProofs = mutation({
+  handler: async (ctx) => {
+    const proofs = await ctx.db
+      .query("portfolioProofs")
+      .withIndex("by_category", (q) => q.eq("category", "transactions"))
+      .collect();
+
+    // Delete storage files first, then metadata
+    for (const proof of proofs) {
+      try {
+        await ctx.storage.delete(proof.fileId);
+      } catch {
+        // File may already be deleted
+      }
+      await ctx.db.delete(proof._id);
+    }
+
+    return { deleted: proofs.length };
+  },
+});

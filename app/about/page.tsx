@@ -28,131 +28,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { STATS, PRICING, CONTACT } from "@/lib/constants";
 import ConnectionWarning from "@/components/ConnectionWarning";
-
-// Real proof images from /public/proofs
-const DEMO_PROOFS = [
-  {
-    _id: "proof-1",
-    title: "GCash Payment - Project Deposit",
-    category: "transactions",
-    amount: "₱15,000",
-    client: "E-Commerce Project",
-    project: "Full-Stack Online Store",
-    url: "/proofs/344491127_189097747410873_5044764886405357473_n.jpg",
-    uploadedAt: Date.now() - 86400000,
-    status: "verified"
-  },
-  {
-    _id: "proof-2",
-    title: "Bank Transfer - Web Application",
-    category: "transactions",
-    amount: "₱35,000",
-    client: "Business Client",
-    project: "Inventory Management System",
-    url: "/proofs/354208609_681970653767022_9119328598945603474_n.jpg",
-    uploadedAt: Date.now() - 172800000,
-    status: "verified"
-  },
-  {
-    _id: "proof-3",
-    title: "GCash Payment - Thesis Project",
-    category: "transactions",
-    amount: "₱8,999",
-    client: "Graduate Student",
-    project: "Thesis System - Attendance Tracker",
-    url: "/proofs/368681989_691052269672955_8601441462095601275_n.jpg",
-    uploadedAt: Date.now() - 259200000,
-    status: "verified"
-  },
-  {
-    _id: "proof-4",
-    title: "PayPal - International Client",
-    category: "transactions",
-    amount: "₱60,000",
-    client: "Startup Founder",
-    project: "Mobile App Development",
-    url: "/proofs/Paypal1.png",
-    uploadedAt: Date.now() - 345600000,
-    status: "verified"
-  },
-  {
-    _id: "proof-5",
-    title: "GCash - Final Milestone Payment",
-    category: "transactions",
-    amount: "₱25,000",
-    client: "SME Business",
-    project: "Restaurant Ordering System",
-    url: "/proofs/370107455_880625013375147_6477420886763730993_n.jpg",
-    uploadedAt: Date.now() - 432000000,
-    status: "verified"
-  },
-  {
-    _id: "proof-6",
-    title: "Bank Transfer - Full Package",
-    category: "transactions",
-    amount: "₱45,000",
-    client: "Masteral Student",
-    project: "Research Prototype - Data Analytics",
-    url: "/proofs/373348118_1939449306433095_6538549887662126165_n.jpg",
-    uploadedAt: Date.now() - 518400000,
-    status: "verified"
-  },
-  {
-    _id: "proof-7",
-    title: "GCash - Landing Page Project",
-    category: "transactions",
-    amount: "₱15,000",
-    client: "Local Business",
-    project: "Business Website + SEO",
-    url: "/proofs/387468061_332798742821177_6717653733070316604_n.jpg",
-    uploadedAt: Date.now() - 604800000,
-    status: "verified"
-  },
-  {
-    _id: "proof-8",
-    title: "GCash - UI/UX Design Package",
-    category: "transactions",
-    amount: "₱12,000",
-    client: "App Startup",
-    project: "Mobile App UI Design",
-    url: "/proofs/403415228_1456706328239649_1801875920785681529_n.jpg",
-    uploadedAt: Date.now() - 691200000,
-    status: "verified"
-  },
-  {
-    _id: "proof-9",
-    title: "PayPal - Cross-Border Project",
-    category: "transactions",
-    amount: "₱30,000",
-    client: "Foreign Client",
-    project: "E-Commerce Platform",
-    url: "/proofs/Paypal2.jpg",
-    uploadedAt: Date.now() - 777600000,
-    status: "verified"
-  },
-  {
-    _id: "proof-10",
-    title: "GCash - Thesis Defense Package",
-    category: "transactions",
-    amount: "₱14,999",
-    client: "Undergrad Student",
-    project: "Complete Thesis System",
-    url: "/proofs/405978890_200775126417163_5006127869135264795_n.jpg",
-    uploadedAt: Date.now() - 864000000,
-    status: "verified"
-  },
-  {
-    _id: "proof-11",
-    title: "Bank Transfer - Enterprise Project",
-    category: "transactions",
-    amount: "₱120,000",
-    client: "Corporate Client",
-    project: "Multi-Role Business Platform",
-    url: "/proofs/406247576_759316646038410_8239693975105175972_n.jpg",
-    uploadedAt: Date.now() - 950400000,
-    status: "verified"
-  },
-];
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
 
 // Helper function to format time ago
 function timeAgo(timestamp: number): string {
@@ -167,13 +44,13 @@ function timeAgo(timestamp: number): string {
 }
 
 export default function AboutPage() {
-  // Use demo proofs only - no Convex dependency to avoid connection errors
-  const displayProofs = DEMO_PROOFS;
+  const convexProofs = useQuery(api.proofs.proofs.getProofs, { category: "transactions" });
+  const displayProofs = Array.isArray(convexProofs) ? convexProofs : [];
   const [carouselIndex, setCarouselIndex] = React.useState(0);
 
   // Calculate stats from proofs
   const totalTransactions = displayProofs.length;
-  const verifiedCount = displayProofs.filter((p: any) => p.status === "verified").length;
+  const verifiedCount = displayProofs.length;
   
   return (
     <div className="container mx-auto px-6 py-24 max-w-6xl">
